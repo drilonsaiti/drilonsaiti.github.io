@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="container">
+
+<nav class="navigation ">
+    <ul class="nav-list">
+        <li><a class="nav-link" href="#header">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+    </ul>
+</nav>
+
+<header class="header" id="header">
+
+        <div class="header-info-text">
+            <h2>
+                <span class="header-info-text__hello">Hi 👋,</span>
+                <span class="header-info-text__before-name"> My name is</span> <span class="header-info-text__name">Drilon.</span>
+                <span class="header-info-text__hobby">I'm a Junior Web Developer </span>
+            </h2>
+
+            <div class="header-info-text__actions">
+                <div class="header-info-text__buttons">
+                    <button class="btn btn-primary">Download CV</button>
+                    <button class="btn btn-secondary" id="contactBtn">Contact me</button>
+                </div>
+
+                <div class="header-info-text__icons">
+                    <i class="icons fa-brands fa-linkedin"></i>
+                    <i class="icons fa-brands fa-github"></i>
+                    <i class="icons fa-brands fa-square-x-twitter"></i>
+                </div>
+            </div>
+        </div>
+    <div class="header-info-img">
+        <div class="rounded-background"></div>
+        <img class="header-image" src="Drilon%20(1).png">
+    </div>
+</header>
+
+<section class="about section" id="about">
+    <div class="about-info">
+    <h2 class="about-heading">About me</h2>
+    <p class="about-text">
+        Greetings! I'm Drilon Saiti, a dedicated junior web developer with a passion for crafting innovative digital solutions. My journey into the world of technology commenced at the Faculty of Computer Science and Engineering - FINKI, where I dedicated myself to mastering the intricacies of software development from 2018 to 2023.
+        <br/><br/><br/>
+
+        With a solid foundation in HTML, CSS, Bootstrap, JavaScript, and React, I thrive on turning ideas into dynamic and user-friendly web interfaces. Additionally, my proficiency extends to Java, Spring Boot, PostgreSQL, empowering me to build robust backend systems and APIs to support seamless functionality.
+        <br/><br/><br/>
+
+        Throughout my journey, I've had the privilege of contributing to a variety of exciting projects, each showcasing my skills and commitment to excellence. As a firm believer in lifelong learning, I am constantly exploring new technologies and methodologies to stay at the forefront of web development trends.
+
+    </p>
+    </div>
+</section>
+
+
+<section class="skills section" id="skills">
+    <h2 class="about-heading">Skills</h2>
+
+    <div class="skills-container">
+        <div class="skills-item">
+            <i class="icons-skills devicon-html5-plain"></i>
+            <p>HTML</p>
+        </div>
+
+        <div class="skills-item">
+            <i class="icons-skills devicon-css3-plain"></i>
+            <p>CSS</p>
+        </div>
+
+        <div class="skills-item">
+            <i class="icons-skills devicon-sass-original"></i>
+            <p>SASS</p>
+        </div>
+
+        <div class="skills-item">
+            <i class="icons-skills devicon-javascript-plain"></i>
+            <p>JAVASCRIPT</p>
+        </div>
+        <div class="skills-item">
+            <i class="icons-skills devicon-react-original"></i>
+            <p>REACT.JS</p>
+        </div>
+        <div class="skills-item">
+            <i class="icons-skills devicon-java-plain"></i>
+            <p>JAVA</p>
+        </div>
+        <div class="skills-item">
+            <i class="icons-skills devicon-spring-original"></i>
+            <p>SPRING BOOT</p>
+        </div>
+        <div class="skills-item">
+            <i class="icons-skills devicon-postgresql-plain"></i>
+            <p>POSTGRESQL</p>
+        </div>
+        <div class="skills-item">
+            <i class="icons-skills devicon-git-plain"></i>
+            <p>GIT/GITHUB</p>
+        </div>
+
+
+
+    </div>
+</section>
+<section class="projects section" id="projects">
+    <h2 class="about-heading">Projects</h2>
+
+    <div class="projects-items">
+        <div class="carousel">
+        <div class="projects-item projects-item-0 active slide-animation">
+            <div class="card">
+                <h3>MediSyncPro</h3>
+                <p>MediSyncPro is a web application designed to streamline the process of scheduling medical appointments and managing patient records online. It allows patients to find and book appointments online with their preferred clinics or doctors. The application offers multiple user roles including Clinic Owner, Doctor, Receptionist, and Patient.</p>
+                <div class="card-buttons">
+                    <a href="https://medisyncpro.vercel.app/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
+
+                <a href="https://github.com/drilonsaiti/MediSyncPro" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
+                </div>
+            </div>
+            <div class="projects-image">
+                <img class="projects-img" src="MediSyncPro.png">
+            </div>
+        </div>
+
+        <div class="projects-item projects-item-1">
+            <div class="card">
+                <h3>E-Book
+                </h3>
+                <p>This application is built using semantic web technology, leveraging Java Spring Boot and Jena. It retrieves data from Dbpedia, a structured database containing information extracted from Wikipedia, and presents it in the application. RDFa (Resource Description Framework in attributes) is used to represent the data in a structured manner, enabling efficient querying and retrieval.</p>
+                <div class="card-buttons">
+                    <!--<a href="https://medisyncpro.vercel.app/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
+-->
+                    <a href="https://github.com/drilonsaiti/E-book" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
+                </div>
+            </div>
+            <div class="projects-image">
+                <img class="projects-img" src="E-Book.png">
+            </div>
+        </div>
+
+        <div class="projects-item projects-item-0">
+            <div class="card">
+                <h3>The eventors</h3>
+                <p>
+                    This project aims to develop an application enabling users to publish and discover various events, such as sports events, concerts, seminars, and conferences. Users can create profiles, search for events across different categories, access event details including participant count and location displayed on a map, add events to their schedule, and follow specific profiles.
+                </p>
+                <div class="card-buttons">
+                    <a href="https://medisyncpro.vercel.app/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
+
+                    <a href="https://github.com/drilonsaiti/The-Eventors-v2" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
+                </div>
+            </div>
+            <div class="projects-image">
+                <img class="projects-img" src="The-Eventors.png">
+            </div>
+        </div>
+
+            <button class="btn-carousel btn--left">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+
+            </button>
+            <button class="btn-carousel btn--right">
+                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+
+            </button>
+
+            <div class="dots">
+                <button class="dot dot--fill">&nbsp;</button>
+                <button class="dot">&nbsp;</button>
+                <button class="dot">&nbsp;</button>
+            </div>
+        </div>
+
+    </div>
+    <button class="see-more btn btn-secondary">See more <i class="icons fa-brands fa-github"></i></button>
+
+</section>
+
+<footer class="footer ">
+    <div class="footer-items">
+        <h2 class="footer-heading">Thanks for visiting</h2>
+
+        <p class="back-to-top"><i class="fa-solid fa-arrow-up"></i>Back to top</p>
+        <div class="footer-last-part">
+            <p class="footer-last-part__text">Made with ❤️, By  Drilon Saiti, &copy; 2024  </p>
+
+            <div class="header-info-text__icons footer-icons">
+                <i  id="contactBtnIcon" class="icons fa-solid fa-envelope"></i>
+                <a class="icons-link" href="https://www.linkedin.com/in/drilon-saiti-82b47819b/">
+                    <i class="icons fa-brands fa-linkedin"></i> </a>
+                <a class="icons-link" href="http://github.com/drilonsaiti"><i class="icons fa-brands fa-github"></i> </a>
+                <a class="icons-link" href="https://twitter.com/drilons6">
+                    <i class="icons fa-brands fa-square-x-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<div id="contactModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-object">
+        <h3>Hey there!</h3>
+        <p>Please send me a message if you have any questions or comments.I will contact you through the email your provide me. Thank you!</p><div  method="post" action="https://formsubmit.co/b61156f524cb025e06290a4eed779a42">
+            <form >
+            <input type="text" placeholder="Name" name="fullName" id="fullName">
+               <input type="text" placeholder="Company name (optional)" name="companyName" id="companyName">
+                <input type="email" placeholder="Email" name="email" id="email">
+                <textarea placeholder="Message" name="message" id="message"></textarea>
+                <input type="hidden" name="_subject" value="New Message from Contact Form!">
+                <div class="modal-buttons">
+                    <button id="close" class="btn btn-secondary ">Close</button>
+                    <button  id="contactBtns"  class="btn btn-primary">Contact me</button>
+                </div>
+
+            </form>
+        </div>
+        </div>
+    </div>
+
+</div>
+<script defer src="index.js"></script>
+
+</body>
+</html>
