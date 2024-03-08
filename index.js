@@ -233,6 +233,11 @@ document.addEventListener('DOMContentLoaded', function() {
             sun.style.display = 'none'
             moon.style.display = 'block';
         }
+    }else{
+        container.classList.add('light-mode');
+        localStorage.setItem('theme', 'light-mode');
+        sun.style.display = 'none'
+        moon.style.display = 'block';
     }
 
 // Toggle between light and dark mode
