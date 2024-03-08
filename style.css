@@ -896,12 +896,13 @@ justify-content: center;
     }
 
     .dots{
-        bottom: -50%;
+        bottom: -90%;
         left: 50%;
+
     }
 
     .see-more{
-        margin-top: 45%;
+        margin-top: 50%;
         width: 30%;
     }
     .footer-items{
@@ -909,7 +910,15 @@ justify-content: center;
     }
 
     .btn--right{
-        right: -1%;
+        right: -3%;
+    }
+
+    .carousel{
+        margin-bottom: 18rem;
+    }
+
+    .projects-items{
+        margin-left: 3%;
     }
 
 }
