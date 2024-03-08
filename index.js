@@ -214,3 +214,41 @@ document.getElementById('contactBtns').addEventListener('click', function() {
 
     window.location.href = mailtoLink;
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Select the container element
+    const themeToggle = document.getElementById('themeToggle');
+    const container = document.querySelector('.container');
+    const moon = document.querySelector('.fa-moon');
+    const sun = document.querySelector('.fa-sun');
+// Check if the theme is stored in local storage
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+        container.classList.add(currentTheme);
+        if (currentTheme === 'dark-mode'){
+            moon.style.display = 'none';
+            sun.style.display = 'block'
+
+        }else{
+            sun.style.display = 'none'
+            moon.style.display = 'block';
+        }
+    }
+
+// Toggle between light and dark mode
+    themeToggle.addEventListener('change', function() {
+        if (this.checked) {
+            container.classList.remove('light-mode');
+            container.classList.add('dark-mode');
+            sun.style.display = 'block'
+            moon.style.display = 'none';
+            localStorage.setItem('theme', 'dark-mode');
+        } else {
+            container.classList.remove('dark-mode');
+            container.classList.add('light-mode');
+            sun.style.display = 'none'
+            moon.style.display = 'block';
+            localStorage.setItem('theme', 'light-mode');
+        }
+    });
+});
