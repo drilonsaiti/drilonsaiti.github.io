@@ -94,17 +94,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const bodyHeight = document.body.clientHeight;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        if (scrollTop + windowHeight >= bodyHeight) {
+        if (scrollTop + windowHeight >= bodyHeight - footer.offsetHeight) {
             footer.classList.add('animated');
             isAnimating = true;
-        } else {
-            footer.classList.remove('animated');
-            isAnimating = false;
         }
     }
 
-    window.addEventListener('scroll', checkFooter);
-    window.addEventListener('resize', checkFooter);
+    function debounce(func, wait = 20, immediate = true) {
+        let timeout;
+        return function() {
+            let context = this, args = arguments;
+            let later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            let callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
+
+    const debouncedCheckFooter = debounce(checkFooter);
+
+    window.addEventListener('scroll', debouncedCheckFooter);
+    window.addEventListener('resize', debouncedCheckFooter);
 
     checkFooter();
 });
