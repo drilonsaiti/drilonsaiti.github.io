@@ -1,16 +1,11 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
+
 
 :root {
     --background-color-light: #fff;
     --text-color-light: #000;
     --background-color-dark: #000;
     --text-color-dark: #fff;
-    --border-color-light: #000; /* Default border color for light mode */
+    --border-color-light: #000;
     --border-color-dark: #fff;
     --border-about-color-dark: rgba(92, 150, 245, 0.03);
     --border-about-color-light: rgba(92, 150, 245, 0.1);
@@ -61,7 +56,7 @@ body{
 }
 
 .switch input {
-    display: none; /* Hide the actual checkbox */
+    display: none;
 }
 
 .switch {
@@ -70,7 +65,7 @@ body{
 }
 
 .switch input {
-    display: none; /* Hide the actual checkbox */
+    display: none;
 }
 
 .switch-icons {
@@ -80,8 +75,8 @@ body{
 }
 
 .switch-icons i {
-    color: var(--text-color); /* Set icon color */
-    font-size: 24px; /* Adjust icon size */
+    color: var(--text-color);
+    font-size: 24px;
     cursor: pointer;
 }
 
@@ -97,16 +92,16 @@ body{
     -ms-grid-rows:10vh 90vh  (min-content)[4];
     grid-template-rows:10vh 90vh  repeat(4,-webkit-min-content);
     grid-template-rows:10vh 90vh  repeat(4,min-content);
-    -ms-grid-columns:  [full-start] minmax(4rem,1fr)
+    -ms-grid-columns:  [full-start] minmax(5rem,1fr)
     [center-start] ([col-start] minmax(-webkit-min-content,14rem) [col-end])[5] [center-end]
 minmax(6rem,1fr) [full-end];
-    -ms-grid-columns:  [full-start] minmax(4rem,1fr)
+    -ms-grid-columns:  [full-start] minmax(5rem,1fr)
     [center-start] ([col-start] minmax(min-content,14rem) [col-end])[5] [center-end]
 minmax(6rem,1fr) [full-end];
-    grid-template-columns:  [full-start] minmax(4rem,1fr)
+    grid-template-columns:  [full-start] minmax(5rem,1fr)
   [center-start] repeat(5,[col-start] minmax(-webkit-min-content,14rem) [col-end]) [center-end]
   minmax(6rem,1fr) [full-end];
-    grid-template-columns:  [full-start] minmax(4rem,1fr)
+    grid-template-columns:  [full-start] minmax(5rem,1fr)
   [center-start] repeat(5,[col-start] minmax(min-content,14rem) [col-end]) [center-end]
   minmax(6rem,1fr) [full-end];
     position: relative;
@@ -554,10 +549,10 @@ minmax(6rem,1fr) [full-end];
 .nav-link::after {
     content: '';
     position: absolute;
-    bottom: -2px; /* Adjust as needed */
+    bottom: -2px;
     left: 0;
     background-color: #fff;
-    height: 2px; /* Adjust thickness as needed */
+    height: 2px;
     width: 0;
     -webkit-transition: width 0.3s ease;
     -o-transition: width 0.3s ease;
@@ -931,7 +926,7 @@ minmax(6rem,1fr) [full-end];
     -ms-flex-align: center;
     align-items: center;
     padding: 20px 80px;
-    width: 120px; /* Adjust as needed */
+    width: 120px;
     height: 100px;
     border: 1px solid var(--border-color);
     border-radius: 2px;
@@ -1140,7 +1135,6 @@ minmax(6rem,1fr) [full-end];
     position: absolute;
     left: 0;
     top: 0;
-    /*transition: opacity .8s ease .2s;*/
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 35% 1fr;
@@ -1358,7 +1352,7 @@ minmax(6rem,1fr) [full-end];
 }
 
 .section {
-    opacity: 0;
+    opacity: 1;
     -webkit-transform: translateY(50px);
     -ms-transform: translateY(50px);
     transform: translateY(50px);
@@ -1592,14 +1586,6 @@ textarea:focus {
 }
 
 @media only screen and (max-width: 1200px) {
-    /* Styles for screens up to 1200px wide (bp-largest) */
-    /* Add your CSS rules here */
-    /*.rounded-background {
-        top: 20%;
-        right: 24.3%;
-        width: 40%;
-        height: 60%;
-    }*/
     .header-image{
         width: 76%;
     }
@@ -1642,8 +1628,7 @@ textarea:focus {
 }
 
 @media only screen and (max-width: 1000px) {
-    /* Styles for screens up to 1000px wide (bp-large) */
-    /* Add your CSS rules here */
+
 
     body{
         font-size: 18px;
@@ -1706,6 +1691,9 @@ textarea:focus {
 }
 
 @media only screen and (max-width: 900px) {
+    body{
+        width: 10%;
+    }
     .header{
         -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
@@ -1737,8 +1725,7 @@ textarea:focus {
 }
 
 @media only screen and (max-width: 800px) {
-    /* Styles for screens up to 800px wide (bp-medium) */
-    /* Add your CSS rules here */
+
     body{
         font-size: 22px;
     }
@@ -1882,8 +1869,6 @@ textarea:focus {
     }
 }
 @media only screen and (max-width: 600px) {
-    /* Styles for screens up to 600px wide (bp-small) */
-    /* Add your CSS rules here */
 
     .header-info-text{
         line-height: 1.3;
@@ -1928,12 +1913,7 @@ textarea:focus {
         -ms-grid-row: 2;
         -ms-grid-column: 1;
     }
-    /*.rounded-background {
-        top: 44%;
-        right: 49.3%;
-        width: 81%;
-        height: 56%;
-    }*/
+
     .icons{
         font-size: 45px;
     }
@@ -1941,13 +1921,7 @@ textarea:focus {
     .about-text, .skills-container{
         margin-left: 0;
     }
-    /*  .container{
-          grid-template-rows:6rem calc(100vh - 6rem) repeat(4,min-content);
-          grid-template-columns:  [full-start] minmax(4rem,1fr)
-    [center-start] repeat(5,[col-start] minmax(min-content,14rem) [col-end]) [center-end]
-    minmax(6rem,1fr) [full-end];
-      }
-  */
+
 
     .navigation{
         font-size: 30px;
@@ -1994,6 +1968,20 @@ textarea:focus {
     }
     .carousel {
         margin-bottom: 28rem;
+    }
+
+
+    .modal-content{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    form input,form textarea{
+        font-size: 30px;
+    }
+    .modal-buttons button{
+        font-size: 25px;
     }
 }
 
@@ -2055,6 +2043,24 @@ textarea:focus {
     }
     .carousel {
         margin-bottom: 28rem;
+    }
+    .modal-content{
+        width: 85%;
+        max-width: 690px;
+    }
+    .modal-content h3{
+        font-size: 45px;
+    }
+    .modal-content p{
+        font-size: 35px;
+    }
+
+    form input,form textarea{
+        font-size: 35px;
+    }
+    .modal-buttons button{
+        font-size: 30px;
+        margin-bottom: 1rem;
     }
 
 }

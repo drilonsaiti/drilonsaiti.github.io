@@ -78,9 +78,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.addEventListener('scroll', checkScroll);
-    window.addEventListener('resize', checkScroll);
+   window.addEventListener('resize', checkScroll);
 
     checkScroll();
+
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -121,6 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', debouncedCheckFooter);
 
     checkFooter();
+
 });
 
 
@@ -149,10 +151,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Check initial scroll position
     checkScroll();
 
-    // Check scroll position on scroll event
     window.addEventListener('scroll', checkScroll);
 });
 
@@ -237,12 +237,12 @@ document.getElementById('contactBtns').addEventListener('click', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Select the container element
+
     const themeToggle = document.getElementById('themeToggle');
     const container = document.querySelector('.container');
     const moon = document.querySelector('.fa-moon');
     const sun = document.querySelector('.fa-sun');
-// Check if the theme is stored in local storage
+
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme) {
         container.classList.add(currentTheme);
