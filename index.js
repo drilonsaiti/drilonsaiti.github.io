@@ -85,16 +85,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const footer = document.querySelector('.footer');
+    let isAnimating = false;
 
     function checkFooter() {
+        if (isAnimating) return;
+
         const windowHeight = window.innerHeight;
         const bodyHeight = document.body.clientHeight;
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
         if (scrollTop + windowHeight >= bodyHeight) {
             footer.classList.add('animated');
+            isAnimating = true;
         } else {
             footer.classList.remove('animated');
+            isAnimating = false;
         }
     }
 
@@ -103,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     checkFooter();
 });
+
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-link');
 
