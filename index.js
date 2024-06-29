@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
     checkFooter();
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-link');
 
@@ -246,7 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
         moon.style.display = 'block';
     }
 
-// Toggle between light and dark mode
     themeToggle.addEventListener('change', function() {
         if (this.checked) {
             container.classList.remove('light-mode');
