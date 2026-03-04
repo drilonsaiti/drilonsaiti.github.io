@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (nav) nav.classList.toggle('scrolled', scrollTop > 20);
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, {passive: true});
     onScroll();
 
     /* ─── CUSTOM SMOOTH SCROLL (easeInOutCubic) ─────── */
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
         },
-        { rootMargin: '-40% 0px -55% 0px' }
+        {rootMargin: '-40% 0px -55% 0px'}
     );
     sections.forEach(s => sectionObserver.observe(s));
 
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             },
-            { threshold: 0, rootMargin: '0px 0px -60px 0px' }
+            {threshold: 0, rootMargin: '0px 0px -60px 0px'}
         );
         revealEls.forEach(el => revealObserver.observe(el));
     } else {
@@ -211,8 +211,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function animateCounter(el, target, duration) {
         duration = duration || 1400;
         let start = null;
-        function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
-        const step = function(ts) {
+
+        function easeOutQuart(t) {
+            return 1 - Math.pow(1 - t, 4);
+        }
+
+        const step = function (ts) {
             if (!start) start = ts;
             const progress = Math.min((ts - start) / duration, 1);
             const value = easeOutQuart(progress) * target;
@@ -239,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 statsObserver.unobserve(el);
             });
         },
-        { threshold: 0.5 }
+        {threshold: 0.5}
     );
     statNums.forEach(el => statsObserver.observe(el));
 
@@ -286,6 +290,44 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
+
+    /* ════════════════════════════════════════════════════
+       11. COPY EMAIL TO CLIPBOARD
+       ════════════════════════════════════════════════════ */
+    const copyBtn = document.getElementById('copyEmailBtn');
+    if (copyBtn) {
+        const email = 'drilon-saiti@hotmail.com';
+        const feedback = copyBtn.querySelector('.copy-email__feedback');
+
+        copyBtn.addEventListener('click', function () {
+            navigator.clipboard.writeText(email).then(function () {
+                feedback.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                clearTimeout(copyBtn._resetTimer);
+                copyBtn._resetTimer = setTimeout(function () {
+                    copyBtn.classList.remove('copied');
+                    feedback.textContent = '';
+                }, 2200);
+            }).catch(function () {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = email;
+                ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                feedback.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                clearTimeout(copyBtn._resetTimer);
+                copyBtn._resetTimer = setTimeout(function () {
+                    copyBtn.classList.remove('copied');
+                    feedback.textContent = '';
+                }, 2200);
+            });
+        });
+    }
+
 
     /* ════════════════════════════════════════════════════
        10. DYNAMIC FOOTER YEAR
