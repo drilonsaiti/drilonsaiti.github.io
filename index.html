@@ -1,391 +1,726 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="description"
-          content="Portfolio of Drilon Saiti, Full-stack Web Developer with hands-on experience in React, Spring Boot, Laravel, and production-ready web applications. View skills, experience and projects.">
-    <meta name="author" content="Drilon Saiti">
-    <meta name="keywords"
-          content="Drilon Saiti, Full-stack Web Developer, Web Developer, React, Spring Boot, Laravel, Java, JavaScript, Skopje, MediaSoft,PHP">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta property="og:title" content="Drilon Saiti | Full-stack Web Developer">
-    <meta property="og:description"
-          content="Full-stack Web Developer with production experience in e-commerce, CRM/ERP and subscription platforms.">
+    <meta name="description" content="Drilon Saiti — Full-stack Engineer specializing in React, Spring Boot, and Laravel. Building production-ready systems for e-commerce, CRM/ERP, and subscription platforms.">
+    <meta name="author" content="Drilon Saiti">
+    <meta name="keywords" content="Drilon Saiti, Full-stack Web Developer, React, Spring Boot, Laravel, Java, JavaScript, Skopje, NDRIT GmbH/MediaSoft">
+    <meta property="og:title" content="Drilon Saiti | Full-stack Engineer">
+    <meta property="og:description" content="Full-stack Engineer with production experience in e-commerce, CRM/ERP and subscription platforms.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://drilonsaiti.github.io/">
-    <meta property="og:image" content="https://drilonsaiti.github.io/Drilon%20(1).webp">
-
+    <meta property="og:image" content="https://drilonsaiti.github.io/Drilon-Saiti.webp">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Drilon Saiti | Full-stack Web Developer">
-    <meta name="twitter:description"
-          content="Portfolio of Full-stack Web Developer Drilon Saiti – projects, experience and tech stack.">
-    <meta name="twitter:image" content="https://drilonsaiti.github.io/Drilon%20(1).webp">
+    <meta name="twitter:title" content="Drilon Saiti | Full-stack Engineer">
+    <meta name="twitter:description" content="Portfolio of Full-stack Engineer Drilon Saiti – projects, experience and tech stack.">
+    <meta name="twitter:image" content="https://drilonsaiti.github.io/Drilon-Saiti.webp">
+    <title>Drilon Saiti — Full-stack Engineer</title>
 
-    <title>Drilon Saiti</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="canonical" href="https://drilonsaiti.github.io/">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
-    <link rel="canonical" href="https://drilonsaiti.github.io/">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link rel="stylesheet" href="style.css">
 
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "Drilon Saiti",
-            "jobTitle": "Full-stack Web Developer",
+            "jobTitle": "Full-stack Engineer",
             "url": "https://drilonsaiti.github.io/",
-            "knowsAbout": ["Java", "Spring Boot", "React", "Laravel","PHP","MySQL","PostgreSQL"],
+            "image": "https://drilonsaiti.github.io/Drilon-Saiti.webp",
+            "knowsAbout": ["Java", "Spring Boot", "React", "Laravel", "PHP", "MySQL", "PostgreSQL", "Docker"],
             "sameAs": [
                 "https://github.com/drilonsaiti",
                 "https://www.linkedin.com/in/drilon-saiti/"
             ]
         }
     </script>
-
 </head>
-<body class="container">
+<body>
 
-<nav class="navigation ">
-    <ul class="nav-list">
-        <li><a class="nav-link" href="#header">Home</a></li>
-        <li><a class="nav-link" href="#about">About</a></li>
-        <li><a class="nav-link" href="#experience">Experience</a></li>
-        <li><a class="nav-link" href="#skills">Skills</a></li>
+<!-- NAV -->
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress" role="progressbar" aria-hidden="true"></div>
 
-        <li><a class="nav-link" href="#projects">Projects</a></li>
-        <li>
-        <label class="switch" for="themeToggle">
-            <div class="switch-icons">
-                <i class="fa-solid fa-moon"></i>
-                <i class="fa-solid fa-sun"></i>
-            </div>
-            <input type="checkbox" id="themeToggle">
-        </label>
-        </li>
-    </ul>
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Scroll back to top" title="Back to top">
+    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+</button>
 
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+        <a href="#hero" class="nav__logo" aria-label="Drilon Saiti — home">DS</a>
+        <ul class="nav__links" role="list">
+            <li><a href="#about" class="nav__link">About</a></li>
+            <li><a href="#experience" class="nav__link">Experience</a></li>
+            <li><a href="#skills" class="nav__link">Skills</a></li>
+            <li><a href="#projects" class="nav__link">Projects</a></li>
+            <li><a href="#contact" class="nav__link">Contact</a></li>
+        </ul>
+        <div class="nav__actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+        <span class="theme-toggle__icon theme-toggle__icon--sun">
+          <i class="fa-solid fa-sun" aria-hidden="true"></i>
+        </span>
+                <span class="theme-toggle__icon theme-toggle__icon--moon">
+          <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        </span>
+            </button>
+            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
 </nav>
 
-<header class="header" id="header">
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul role="list">
+        <li><a href="#about" class="nav__link" tabindex="-1">About</a></li>
+        <li><a href="#experience" class="nav__link" tabindex="-1">Experience</a></li>
+        <li><a href="#skills" class="nav__link" tabindex="-1">Skills</a></li>
+        <li><a href="#projects" class="nav__link" tabindex="-1">Projects</a></li>
+        <li><a href="#contact" class="nav__link" tabindex="-1">Contact</a></li>
+    </ul>
+</div>
 
-        <div class="header-info-text">
-            <h2>
-                <span class="header-info-text__hello">Hi 👋,</span>
-                <span class="header-info-text__before-name"> My name is</span>
-                <span class="header-info-text__name">Drilon.</span>
-                <span class="header-info-text__hobby">I'm a Full-stack Web Developer</span>
-            </h2>
-
-            <div class="header-info-text__actions">
-                <div class="header-info-text__buttons">
-                    <a href="Drilon-Saiti-CV.pdf" download="Drilon-Saiti-CV" class="btn-link btn btn-primary">Download CV</a>
-                    <button class="btn btn-secondary" id="contactBtn">Contact me</button>
-                </div>
-
-                <div class="header-info-text__icons">
-                    <a href="https://www.linkedin.com/in/drilon-saiti/" target="_blank"><i class="icons fa-brands fa-linkedin"></i></a>
-                    <a href="https://github.com/drilonsaiti" target="_blank"> <i class="icons fa-brands fa-github"></i></a>
-                    <a href="https://x.com/drilons6" target="_blank"><i class="icons fa-brands fa-square-x-twitter"></i></a>
-                </div>
+<!-- HERO -->
+<section class="hero" id="hero" aria-labelledby="heroHeading">
+    <div class="hero__bg-text" aria-hidden="true">FULL-STACK</div>
+    <div class="hero__inner">
+        <div class="hero__content">
+            <p class="hero__eyebrow">Available for new opportunities</p>
+            <h1 class="hero__name" id="heroHeading">
+                Drilon<br><em>Saiti</em>
+            </h1>
+            <p class="hero__role">Full-stack Engineer</p>
+            <p class="hero__tagline">I build production-ready systems that scale — from pixel-precise interfaces to resilient server architecture.</p>
+            <div class="hero__actions">
+                <a href="Drilon-Saiti-CV.pdf" download="Drilon-Saiti-CV" class="btn btn--primary">
+                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> Download CV
+                </a>
+                <a href="#contact" class="btn btn--ghost">Let's talk</a>
             </div>
-        </div>
-    <div class="header-info-img">
-        <div class="rounded-background"></div>
-        <img class="header-image" src="Drilon%20(1).webp" alt="Drilon Saiti profile photo">
-    </div>
-</header>
-
-<section class="about section" id="about">
-    <div class="about-info">
-    <h2 class="about-heading">About me</h2>
-        <p class="about-text">
-            I’m Drilon Saiti, a Full-stack Web Developer building real products for real users.
-            At MediaSoft, I work across the full development lifecycle — from planning and architecture to frontend interfaces and backend logic. I’ve contributed to production systems used daily by businesses, including e-commerce platforms, CRM/ERP solutions and subscription services.            <br/><br/>
-
-            My technical strengths span React, Java Spring Boot and Laravel, supported by modern tooling, SQL databases and clean Git workflows. I enjoy solving complex challenges, improving performance and shipping features that deliver measurable value.
-            <br/><br/>
-
-            I began my journey studying Computer Science at FINKI, and have been growing every day since, driven by curiosity, responsibility and a passion for building reliable software that people actually use.
-        </p>
-    </div>
-</section>
-
-<section class="experience section" id="experience">
-    <h2 class="about-heading">Experience</h2>
-
-    <div class="experience-container">
-        <div class="experience-item">
-            <div class="experience-header">
-                <h3>Full-stack Web Developer</h3>
-                <span class="experience-date">2024 - 2025</span>
-            </div>
-            <h4 class="experience-company">MediaSoft • Remote</h4>
-            <ul class="experience-details">
-                <li>Worked on multiple live production systems including e-commerce platforms, CRM/ERP systems, and subscription-based applications</li>
-                <li>Developed and scaled core business functionality, third-party integrations, and payment workflows</li>
-                <li>Built data-driven features and complex business logic for real customer environments</li>
-                <li>Contributed across full development lifecycle with 760+ GitHub contributions</li>
-            </ul>
-        </div>
-
-        <div class="experience-item">
-            <div class="experience-header">
-                <h3>Intern Web Developer</h3>
-                <span class="experience-date">2023 - 2024</span>
-            </div>
-            <h4 class="experience-company">PurpleDot • Skopje</h4>
-            <ul class="experience-details">
-                <li>Utilized problem-solving skills to overcome obstacles during projects</li>
-                <li>Collaborated with diverse teams enhancing teamwork across departments</li>
-                <li>Delivered high-quality work demonstrating strong work ethic</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-
-<section class="skills section" id="skills">
-    <h2 class="about-heading">Skills</h2>
-
-    <div class="skills-container">
-        <div class="skills-item">
-            <i class="icons-skills devicon-html5-plain"></i>
-            <p>HTML</p>
-        </div>
-
-        <div class="skills-item">
-            <i class="icons-skills devicon-css3-plain"></i>
-            <p>CSS</p>
-        </div>
-
-        <div class="skills-item">
-            <i class="icons-skills devicon-sass-original"></i>
-            <p>SASS</p>
-        </div>
-
-        <div class="skills-item">
-            <i class="icons-skills devicon-javascript-plain"></i>
-            <p>JAVASCRIPT</p>
-        </div>
-        <div class="skills-item">
-            <i class="icons-skills devicon-react-original"></i>
-            <p>REACT.JS</p>
-        </div>
-        <div class="skills-item">
-            <i class="icons-skills devicon-java-plain"></i>
-            <p>JAVA</p>
-        </div>
-        <div class="skills-item">
-            <i class="icons-skills devicon-spring-original"></i>
-            <p>SPRING BOOT</p>
-        </div>
-        <div class="skills-item">
-            <i class="icons-skills devicon-php-plain"></i>
-            <p>PHP</p>
-        </div>
-
-        <div class="skills-item">
-            <i class="icons-skills devicon-laravel-plain"></i>
-            <p>LARAVEL</p>
-        </div>
-
-        <div class="skills-item">
-            <i class="icons-skills devicon-mysql-plain"></i>
-            <p>MYSQL</p>
-        </div>
-
-        <div class="skills-item">
-            <i class="icons-skills devicon-postgresql-plain"></i>
-            <p>POSTGRESQL</p>
-        </div>
-        <div class="skills-item">
-            <i class="icons-skills devicon-git-plain"></i>
-            <p>GIT/GITHUB</p>
-        </div>
-
-
-
-    </div>
-</section>
-<section class="projects section" id="projects">
-    <h2 class="about-heading">Projects</h2>
-
-    <div class="projects-items">
-        <div class="carousel">
-        <div class="projects-item projects-item-0 active slide-animation">
-            <div class="card">
-                <h3>MediSyncPro</h3>
-                <p>MediSyncPro is a web application designed to streamline the process of scheduling medical appointments and managing patient records online. It allows patients to find and book appointments online with their preferred clinics or doctors. The application offers multiple user roles including Clinic Owner, Doctor, Receptionist, and Patient.</p>
-                <div class="card-buttons">
-                    <a href="https://medisyncpro.vercel.app/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
-
-                <a href="https://github.com/drilonsaiti/MediSyncPro" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
-                </div>
-            </div>
-            <div class="projects-image">
-                <img class="projects-img" src="MediSyncPro.png" alt="MediSyncPro screenshot">
-            </div>
-        </div>
-
-            <div class="projects-item projects-item-1">
-                <div class="card">
-                    <h3>Moment share connect</h3>
-                    <p>Moment share connect is a web application designed to facilitate event photo and video management. It enables event organizers to efficiently handle media submissions from guests during events and provides a user-friendly interface for accessing and downloading event photos and videos post-event.</p>
-                    <div class="card-buttons">
-                        <a href="https://moments-share-connect.vercel.app/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
-
-                        <a href="https://github.com/drilonsaiti/moments-share-connect" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
-                    </div>
-                </div>
-                <div class="projects-image">
-                    <img class="projects-img" src="MomentShareConnect.jpg" alt="MomentShareConnect screenshot">
-                </div>
-            </div>
-        <div class="projects-item projects-item-2">
-            <div class="card">
-                <h3>E-Book
-                </h3>
-                <p>This application is built using semantic web technology, leveraging Java Spring Boot and Jena. It retrieves data from Dbpedia, a structured database containing information extracted from Wikipedia, and presents it in the application. RDFa (Resource Description Framework in attributes) is used to represent the data in a structured manner, enabling efficient querying and retrieval.</p>
-                <div class="card-buttons">
-                    <a href="https://e-book-q4i6.onrender.com/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
-                    <a href="https://github.com/drilonsaiti/E-book" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
-                </div>
-            </div>
-            <div class="projects-image">
-                <img class="projects-img" src="E-Book.png" alt="E-Book screenshot">
-            </div>
-        </div>
-
-        <div class="projects-item projects-item-3">
-            <div class="card">
-                <h3>The Eventors</h3>
-                <p>
-                    This project aims to develop an application enabling users to publish and discover various events, such as sports events, concerts, seminars, and conferences. Users can create profiles, search for events across different categories, access event details including participant count and location displayed on a map, add events to their schedule, and follow specific profiles.
-                </p>
-                <div class="card-buttons">
-                    <a href="https://medisyncpro.vercel.app/" target="_blank" class="btn-link btn btn-primary btn-with-icons"> <i class="fa fa-eye"> </i>Live demo</a>
-
-                    <a href="https://github.com/drilonsaiti/The-Eventors-v2" target="_blank" class="btn-link btn btn-secondary btn-with-icons "><i class="fa-brands fa-github"></i>See code</a>
-                </div>
-            </div>
-            <div class="projects-image">
-                <img class="projects-img" src="The-Eventors.png" alt="The Eventors screenshot">
-            </div>
-        </div>
-
-            <button class="btn-carousel btn--left">
-                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-
-            </button>
-            <button class="btn-carousel btn--right">
-                <svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-
-            </button>
-
-            <div class="dots">
-                <button class="dot dot--fill">&nbsp;</button>
-                <button class="dot">&nbsp;</button>
-                <button class="dot">&nbsp;</button>
-                <button class="dot">&nbsp;</button>
-            </div>
-        </div>
-
-    </div>
-    <button class="see-more btn btn-secondary">See more <i class="icons fa-brands fa-github"></i></button>
-
-</section>
-
-<section class="stats section" id="stats">
-    <h2 class="about-heading">By The Numbers</h2>
-
-    <div class="stats-container">
-        <div class="stats-item">
-            <i class="fa-solid fa-code-commit stats-icon"></i>
-            <h3 class="stats-number">760+</h3>
-            <p class="stats-label">GitHub Contributions</p>
-        </div>
-
-        <div class="stats-item">
-            <i class="fa-solid fa-briefcase stats-icon"></i>
-            <h3 class="stats-number">2+</h3>
-            <p class="stats-label">Years Experience</p>
-        </div>
-
-        <div class="stats-item">
-            <i class="fa-solid fa-diagram-project stats-icon"></i>
-            <h3 class="stats-number">10+</h3>
-            <p class="stats-label">Projects Completed</p>
-        </div>
-
-        <div class="stats-item">
-            <i class="fa-solid fa-laptop-code stats-icon"></i>
-            <h3 class="stats-number">8+</h3>
-            <p class="stats-label">Technologies</p>
-        </div>
-    </div>
-</section>
-
-<footer class="footer ">
-    <div class="footer-items">
-        <h2 class="footer-heading">Thanks for visiting</h2>
-
-        <p class="back-to-top"><i class="fa-solid fa-arrow-up"></i>Back to top</p>
-        <div class="footer-last-part">
-            <p class="footer-last-part__text">Made with ❤️, By Drilon Saiti, © 2026</p>
-
-            <div class="header-info-text__icons footer-icons">
-                <i  id="contactBtnIcon" class="icons fa-solid fa-envelope"></i>
-                <a class="icons-link" href="https://www.linkedin.com/in/drilon-saiti-82b47819b/">
-                    <i class="icons fa-brands fa-linkedin"></i> </a>
-                <a class="icons-link" href="http://github.com/drilonsaiti"><i class="icons fa-brands fa-github"></i> </a>
-                <a class="icons-link" href="https://twitter.com/drilons6">
-                    <i class="icons fa-brands fa-square-x-twitter"></i>
+            <div class="hero__social" aria-label="Social links">
+                <a href="https://www.linkedin.com/in/drilon-saiti/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <i class="fa-brands fa-github" aria-hidden="true"></i>
+                </a>
+                <a href="https://x.com/drilons6" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+                    <i class="fa-brands fa-square-x-twitter" aria-hidden="true"></i>
                 </a>
             </div>
+        </div>
+        <div class="hero__image-wrap">
+            <div class="hero__image-frame" aria-hidden="true">
+                <img src="Drilon-Saiti.webp" alt="Drilon Saiti" class="hero__image" width="420" height="520" loading="eager">
+                <div class="hero__image-deco hero__image-deco--1"></div>
+                <div class="hero__image-deco hero__image-deco--2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="hero__scroll-hint" aria-hidden="true">
+        <span>scroll</span>
+        <div class="hero__scroll-line"></div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" aria-label="Key stats">
+    <div class="stats__inner">
+        <div class="stats__item reveal">
+            <strong class="stats__num">760<span>+</span></strong>
+            <span class="stats__label">GitHub Contributions</span>
+        </div>
+        <div class="stats__item reveal" style="--delay:.1s">
+            <strong class="stats__num">2<span>+</span></strong>
+            <span class="stats__label">Years Experience</span>
+        </div>
+        <div class="stats__item reveal" style="--delay:.2s">
+            <strong class="stats__num">10<span>+</span></strong>
+            <span class="stats__label">Projects Shipped</span>
+        </div>
+        <div class="stats__item reveal" style="--delay:.3s">
+            <strong class="stats__num">8<span>+</span></strong>
+            <span class="stats__label">Technologies</span>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about section-pad" id="about" aria-labelledby="aboutHeading">
+    <div class="container">
+        <div class="section-label reveal">About</div>
+        <div class="about__grid">
+            <div class="about__left reveal">
+                <h2 class="section-heading" id="aboutHeading">I ship code that <em>matters</em></h2>
+            </div>
+            <div class="about__right reveal" style="--delay:.15s">
+                <p class="about__lead">Full-stack Engineer at NDRIT GmbH/MediaSoft, building real products for real businesses — from architecture through to deployment.</p>
+                <p class="about__body">My strengths span React, Java Spring Boot and Laravel. I've contributed to production e-commerce platforms, CRM/ERP systems, and subscription services used daily by businesses. 760+ GitHub contributions, a Computer Science graduation from FINKI (FCSE), and a genuine obsession with well-crafted, performant code.</p>
+                <ul class="about__chips" aria-label="Key traits">
+                    <li>Full-stack</li>
+                    <li>Performance-first</li>
+                    <li>Production-grade</li>
+                    <li>CS-educated</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience section-pad" id="experience" aria-labelledby="expHeading">
+    <div class="container">
+        <div class="section-label reveal">Experience</div>
+        <h2 class="section-heading reveal" id="expHeading">Where I've worked</h2>
+
+        <div class="timeline" role="list">
+
+            <article class="timeline__item reveal" role="listitem">
+                <div class="timeline__marker" aria-hidden="true"></div>
+                <div class="timeline__body">
+                    <div class="timeline__header">
+                        <div>
+                            <h3 class="timeline__role">Full-stack Web Developer</h3>
+                            <p class="timeline__company">NDRIT GmbH/MediaSoft &nbsp;·&nbsp; Remote</p>
+                        </div>
+                        <time class="timeline__date" datetime="2024/2025">2024 – 2026</time>
+                    </div>
+                    <ul class="timeline__bullets">
+                        <li>Engineered core features across live e-commerce, CRM/ERP, and subscription platforms serving active business clients</li>
+                        <li>Architected third-party integrations and payment workflows that reduced checkout failure rates</li>
+                        <li>Delivered data-driven features and complex business logic from initial spec to production deployment</li>
+                        <li>Maintained 760+ GitHub contributions, consistently owning features end-to-end across the full stack</li>
+                    </ul>
+                    <div class="timeline__tech" aria-label="Technologies used">
+                        <span>React</span><span>Spring Boot</span><span>Laravel</span><span>MySQL</span><span>PostgreSQL</span><span>Docker</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="timeline__item reveal" style="--delay:.15s" role="listitem">
+                <div class="timeline__marker" aria-hidden="true"></div>
+                <div class="timeline__body">
+                    <div class="timeline__header">
+                        <div>
+                            <h3 class="timeline__role">Intern Web Developer</h3>
+                            <p class="timeline__company">PurpleDot &nbsp;·&nbsp; Skopje</p>
+                        </div>
+                        <time class="timeline__date" datetime="2023/2024">2023 – 2024</time>
+                    </div>
+                    <ul class="timeline__bullets">
+                        <li>Applied systematic problem-solving to unblock critical project blockers under tight deadlines</li>
+                        <li>Collaborated across cross-functional teams, improving communication between development and product</li>
+                        <li>Delivered high-quality work that met client standards and demonstrated production readiness</li>
+                    </ul>
+                    <div class="timeline__tech" aria-label="Technologies used">
+                        <span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Git</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills section-pad" id="skills" aria-labelledby="skillsHeading">
+    <div class="container">
+        <div class="section-label reveal">Skills</div>
+        <h2 class="section-heading reveal" id="skillsHeading">Tech stack</h2>
+
+        <div class="skills__grid">
+
+            <div class="skills__category reveal">
+                <h3 class="skills__cat-title">Frontend</h3>
+                <ul class="skills__list" role="list">
+                    <li><i class="devicon-react-original colored" aria-hidden="true"></i> React</li>
+                    <li><i class="devicon-javascript-plain colored" aria-hidden="true"></i> JavaScript</li>
+                    <li><i class="devicon-typescript-plain colored" aria-hidden="true"></i> TypeScript</li>
+                    <li><i class="devicon-html5-plain colored" aria-hidden="true"></i> HTML5</li>
+                    <li><i class="devicon-css3-plain colored" aria-hidden="true"></i> CSS3</li>
+                    <li><i class="devicon-tailwindcss-plain colored" aria-hidden="true"></i> Tailwind</li>
+                </ul>
+            </div>
+
+            <div class="skills__category reveal" style="--delay:.1s">
+                <h3 class="skills__cat-title">Backend</h3>
+                <ul class="skills__list" role="list">
+                    <li><i class="devicon-java-plain colored" aria-hidden="true"></i> Java</li>
+                    <li><i class="devicon-spring-plain colored" aria-hidden="true"></i> Spring Boot</li>
+                    <li><i class="devicon-laravel-plain colored" aria-hidden="true"></i> Laravel</li>
+                    <li><i class="devicon-php-plain colored" aria-hidden="true"></i> PHP</li>
+                    <li><i class="devicon-nodejs-plain colored" aria-hidden="true"></i> Node.js</li>
+                    <li><i class="devicon-python-plain colored" aria-hidden="true"></i> Python</li>
+                </ul>
+            </div>
+
+            <div class="skills__category reveal" style="--delay:.2s">
+                <h3 class="skills__cat-title">Database</h3>
+                <ul class="skills__list" role="list">
+                    <li><i class="devicon-postgresql-plain colored" aria-hidden="true"></i> PostgreSQL</li>
+                    <li><i class="devicon-mysql-plain colored" aria-hidden="true"></i> MySQL</li>
+                    <li><i class="devicon-mongodb-plain colored" aria-hidden="true"></i> MongoDB</li>
+                    <li><i class="devicon-redis-plain colored" aria-hidden="true"></i> Redis</li>
+                </ul>
+            </div>
+
+            <div class="skills__category reveal" style="--delay:.3s">
+                <h3 class="skills__cat-title">DevOps &amp; Tools</h3>
+                <ul class="skills__list" role="list">
+                    <li><i class="devicon-docker-plain colored" aria-hidden="true"></i> Docker</li>
+                    <li><i class="devicon-git-plain colored" aria-hidden="true"></i> Git</li>
+                    <li><i class="devicon-github-original" aria-hidden="true"></i> GitHub</li>
+                    <li><i class="devicon-linux-plain" aria-hidden="true"></i> Linux</li>
+                    <li><i class="devicon-intellij-plain colored" aria-hidden="true"></i> IntelliJ</li>
+                    <li><i class="devicon-vscode-plain colored" aria-hidden="true"></i> VS Code</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects section-pad" id="projects" aria-labelledby="projectsHeading">
+    <div class="container">
+        <div class="section-label reveal">Projects</div>
+        <h2 class="section-heading reveal" id="projectsHeading">Selected work</h2>
+
+        <!-- ── TIER 1: PROFESSIONAL ─────────────────────── -->
+        <div class="projects__tier-label reveal">
+      <span class="tier-badge tier-badge--pro">
+        <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Professional — shipped at NDRIT GmbH/MediaSoft
+      </span>
+        </div>
+
+        <div class="projects__grid">
+
+            <!-- Pro 1: adziko.mk + reifenpower.ch -->
+            <article class="project-card reveal" aria-labelledby="proj1Title">
+                <div class="project-card__image-wrap">
+                    <div class="project-card__browser-frame" aria-hidden="true">
+                        <div class="browser-bar">
+                            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+                            <span class="browser-url">adziko.mk</span>
+                        </div>
+                        <div class="browser-body browser-body--ecom">
+                            <div class="mock-hero-bar"></div>
+                            <div class="mock-nav"><span></span><span></span><span></span><span></span></div>
+                            <div class="mock-grid">
+                                <div class="mock-card"></div><div class="mock-card"></div>
+                                <div class="mock-card"></div><div class="mock-card"></div>
+                                <div class="mock-card"></div><div class="mock-card"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">01</span>
+                        <div class="project-card__links" aria-label="Project links">
+                            <a href="https://adziko.mk" target="_blank" rel="noopener noreferrer" aria-label="Visit adziko.mk" title="adziko.mk">
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://reifenpower.ch" target="_blank" rel="noopener noreferrer" aria-label="Visit reifenpower.ch" title="reifenpower.ch">
+                                <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card__pro-badge">
+                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production · 2 markets
+                    </div>
+                    <h3 class="project-card__title" id="proj1Title">E-Commerce Platforms</h3>
+                    <p class="project-card__subtitle">adziko.mk &nbsp;·&nbsp; reifenpower.ch</p>
+                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
+
+                    <div class="project-card__psr">
+                        <div class="psr-item">
+                            <span class="psr-label">Problem</span>
+                            <p>Two separate retail businesses — a Macedonian home goods chain and a Swiss tyre retailer — needed full-featured e-commerce systems built to production quality.</p>
+                        </div>
+                        <div class="psr-item">
+                            <span class="psr-label">Solution</span>
+                            <p>Engineered multi-category storefronts with product management, cart and checkout flows, payment integrations, and admin dashboards for live inventory control.</p>
+                        </div>
+                        <div class="psr-item">
+                            <span class="psr-label">Result</span>
+                            <p>Both platforms are live and actively serving customers — adziko.mk across Macedonia, reifenpower.ch handling Swiss tyre orders with full payment processing.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card__stack" aria-label="Tech stack">
+                        <span>Laravel</span><span>React</span><span>MySQL</span><span>Stripe</span><span>REST API</span>
+                    </div>
+                    <div class="project-card__cta">
+                        <a href="https://adziko.mk" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i> adziko.mk
+                        </a>
+                        <a href="https://reifenpower.ch" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i> reifenpower.ch
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Pro 2: TeamGuider -->
+            <article class="project-card project-card--reverse reveal" style="--delay:.1s" aria-labelledby="proj2Title">
+                <div class="project-card__image-wrap">
+                    <div class="project-card__browser-frame" aria-hidden="true">
+                        <div class="browser-bar">
+                            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+                            <span class="browser-url">app.teamguider.com</span>
+                        </div>
+                        <div class="browser-body browser-body--saas">
+                            <div class="mock-sidebar">
+                                <div class="mock-sidebar-item active"></div>
+                                <div class="mock-sidebar-item"></div>
+                                <div class="mock-sidebar-item"></div>
+                                <div class="mock-sidebar-item"></div>
+                            </div>
+                            <div class="mock-main">
+                                <div class="mock-heading-bar"></div>
+                                <div class="mock-block"></div>
+                                <div class="mock-block mock-block--sm"></div>
+                                <div class="mock-row">
+                                    <div class="mock-pill"></div><div class="mock-pill"></div><div class="mock-pill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">02</span>
+                        <div class="project-card__links" aria-label="Project links">
+                            <a href="https://teamguider.com" target="_blank" rel="noopener noreferrer" aria-label="Visit TeamGuider" title="teamguider.com">
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://app.teamguider.com/login" target="_blank" rel="noopener noreferrer" aria-label="Open TeamGuider app" title="App login">
+                                <i class="fa-solid fa-globe" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card__pro-badge">
+                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production SaaS · Paying users
+                    </div>
+                    <h3 class="project-card__title" id="proj2Title">TeamGuider</h3>
+                    <p class="project-card__subtitle">AI-powered SOP &amp; Playbook Platform</p>
+                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
+
+                    <div class="project-card__psr">
+                        <div class="psr-item">
+                            <span class="psr-label">Problem</span>
+                            <p>Growing teams lose operational knowledge in chat threads and tribal memory — onboarding takes weeks and processes are never documented consistently.</p>
+                        </div>
+                        <div class="psr-item">
+                            <span class="psr-label">Solution</span>
+                            <p>Built a subscription SaaS platform where teams create, manage, and share AI-generated SOPs and playbooks — with access controls, quizzes, and analytics.</p>
+                        </div>
+                        <div class="psr-item">
+                            <span class="psr-label">Result</span>
+                            <p>Launched to paying customers across multiple businesses including mobi-promo and others — full subscription billing, Pro/Enterprise tiers, and team collaboration live.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card__stack" aria-label="Tech stack">
+                        <span>React</span><span>NestJS</span><span>PostgreSQL</span><span>AI Integration</span><span>Stripe</span>
+                    </div>
+                    <div class="project-card__cta">
+                        <a href="https://teamguider.com" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i> Live Site
+                        </a>
+                        <a href="https://app.teamguider.com/login" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> App Login
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Pro 3: SeneCart -->
+            <article class="project-card reveal" style="--delay:.1s" aria-labelledby="proj3Title">
+                <div class="project-card__image-wrap">
+                    <div class="project-card__browser-frame" aria-hidden="true">
+                        <div class="browser-bar">
+                            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
+                            <span class="browser-url">senecart.com</span>
+                        </div>
+                        <div class="browser-body browser-body--crm">
+                            <div class="mock-sidebar">
+                                <div class="mock-sidebar-item active"></div>
+                                <div class="mock-sidebar-item"></div>
+                                <div class="mock-sidebar-item"></div>
+                            </div>
+                            <div class="mock-main">
+                                <div class="mock-stat-row">
+                                    <div class="mock-stat"></div><div class="mock-stat"></div><div class="mock-stat"></div>
+                                </div>
+                                <div class="mock-table">
+                                    <div class="mock-tr"></div><div class="mock-tr"></div><div class="mock-tr mock-tr--alt"></div><div class="mock-tr"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">03</span>
+                        <div class="project-card__links" aria-label="Project links">
+                            <a href="https://senecart.com" target="_blank" rel="noopener noreferrer" aria-label="Visit SeneCart" title="senecart.com">
+                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="project-card__pro-badge">
+                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production · Art &amp; Gallery sector
+                    </div>
+                    <h3 class="project-card__title" id="proj3Title">SenecArt</h3>
+                    <p class="project-card__subtitle">Artwork Inventory Management SaaS</p>
+                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
+
+                    <div class="project-card__psr">
+                        <div class="psr-item">
+                            <span class="psr-label">Problem</span>
+                            <p>Art galleries and private collectors managed provenance, valuations, and exhibition schedules across spreadsheets — a fragile, unscalable approach.</p>
+                        </div>
+                        <div class="psr-item">
+                            <span class="psr-label">Solution</span>
+                            <p>Developed a full-featured inventory SaaS with consignment tracking, client/collector CRM, exhibition management, sales analytics, and public portfolio sharing.</p>
+                        </div>
+                        <div class="psr-item">
+                            <span class="psr-label">Result</span>
+                            <p>Shipped a polished, multi-tenant SaaS platform for the art industry — with provenance chains, appraisal records, and shareable digital portfolio links.</p>
+                        </div>
+                    </div>
+
+                    <div class="project-card__stack" aria-label="Tech stack">
+                        <span>React</span><span>Laravel</span><span>MySQL</span><span>REST API</span><span>Multi-tenant</span>
+                    </div>
+                    <div class="project-card__cta">
+                        <a href="https://senecart.com" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i> Live Site
+                        </a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Pro 4: Other production sites row -->
+            <article class="project-card project-card--compact reveal" style="--delay:.15s" aria-labelledby="proj4Title">
+                <div class="project-card__body project-card__body--full">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">04</span>
+                    </div>
+                    <div class="project-card__pro-badge">
+                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production · Additional client work
+                    </div>
+                    <h3 class="project-card__title" id="proj4Title">Additional Production Systems</h3>
+                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
+                    <p class="project-card__desc">Several more live commercial systems built and deployed at NDRIT GmbH/MediaSoft — a romantic gifting platform, a government registration portal, online course platform, and a promotional campaign platform.</p>
+
+                    <div class="project-card__multi-links">
+                        <a href="https://romantiklove.com" target="_blank" rel="noopener noreferrer" class="multi-link">
+                            <span class="multi-link__label">romantiklove.com</span>
+                            <span class="multi-link__tag">Gifting platform</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://prijava.dpi.gov.mk" target="_blank" rel="noopener noreferrer" class="multi-link">
+                            <span class="multi-link__label">prijava.dpi.gov.mk</span>
+                            <span class="multi-link__tag">Gov. registration portal</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://learning.gfeb.org/" target="_blank" rel="noopener noreferrer" class="multi-link">
+                            <span class="multi-link__label">learning.gfeb.org</span>
+                            <span class="multi-link__tag">Online course platform</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://mobi-promo.com/welcome" target="_blank" rel="noopener noreferrer" class="multi-link">
+                            <span class="multi-link__label">mobi-promo.com</span>
+                            <span class="multi-link__tag">Promotional platform</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <div class="project-card__stack" aria-label="Tech stack">
+                        <span>Laravel</span><span>React</span><span>Spring Boot</span><span>MySQL</span><span>PostgreSQL</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- ── TIER 2: PERSONAL ──────────────────────────── -->
+        <div class="projects__tier-label reveal" style="--delay:.1s; margin-top: 5rem;">
+      <span class="tier-badge tier-badge--personal">
+        <i class="fa-brands fa-github" aria-hidden="true"></i> Personal — side projects &amp; experiments
+      </span>
+        </div>
+
+        <div class="projects__grid projects__grid--personal">
+
+            <article class="project-card project-card--personal reveal" aria-labelledby="proj5Title">
+                <div class="project-card__image-wrap">
+                    <img src="MomentShareConnect.jpg" alt="Moment Share Connect app screenshot" class="project-card__image" loading="lazy" width="640" height="380">
+                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">05</span>
+                        <div class="project-card__links" aria-label="Project links">
+                            <a href="https://moments-share-connect.vercel.app/" target="_blank" rel="noopener noreferrer" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            <a href="https://github.com/drilonsaiti/moments-share-connect" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-card__title" id="proj5Title">Moment Share Connect</h3>
+                    <p class="project-card__role">Solo · Full-stack</p>
+                    <p class="project-card__desc">Real-time event media platform — guests scan a QR code to upload photos and videos; organizers get an instant, downloadable gallery post-event.</p>
+                    <div class="project-card__stack"><span>React</span><span>Spring Boot</span><span>PostgreSQL</span><span>Supabase storage</span></div>
+                    <div class="project-card__cta">
+                        <a href="https://moments-share-connect.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
+                        <a href="https://github.com/drilonsaiti/moments-share-connect" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card project-card--personal reveal" style="--delay:.1s" aria-labelledby="proj6Title">
+                <div class="project-card__image-wrap">
+                    <img src="The-Eventors.png" alt="The Eventors event platform screenshot" class="project-card__image" loading="lazy" width="640" height="380">
+                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">06</span>
+                        <div class="project-card__links" aria-label="Project links">
+                            <a href="https://medisyncpro.vercel.app/" target="_blank" rel="noopener noreferrer" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            <a href="https://github.com/drilonsaiti/The-Eventors-v2" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-card__title" id="proj6Title">The Eventors</h3>
+                    <p class="project-card__role">Team · Full-stack</p>
+                    <p class="project-card__desc">Event discovery platform with profile creation, map-based venue display, real-time participant counts, and a social follow feed.</p>
+                    <div class="project-card__stack"><span>Flutter</span><span>Spring Boot</span><span>PostgreSQL</span><span>Google Maps</span></div>
+                    <div class="project-card__cta">
+                        <a href="https://medisyncpro.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
+                        <a href="https://github.com/drilonsaiti/The-Eventors-v2" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card project-card--personal reveal" style="--delay:.2s" aria-labelledby="proj7Title">
+                <div class="project-card__image-wrap">
+                    <img src="E-Book.png" alt="E-Book semantic web application screenshot" class="project-card__image" loading="lazy" width="640" height="380">
+                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </div>
+                <div class="project-card__body">
+                    <div class="project-card__meta">
+                        <span class="project-card__number" aria-hidden="true">07</span>
+                        <div class="project-card__links" aria-label="Project links">
+                            <a href="https://e-book-q4i6.onrender.com/" target="_blank" rel="noopener noreferrer" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+                            <a href="https://github.com/drilonsaiti/E-book" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <h3 class="project-card__title" id="proj7Title">E-Book — Semantic Web</h3>
+                    <p class="project-card__role">Academic · Full-stack</p>
+                    <p class="project-card__desc">Spring Boot + Apache Jena app that pulls structured book data from DBpedia via SPARQL — demonstrating semantic web and linked-data architecture.</p>
+                    <div class="project-card__stack"><span>Spring Boot</span><span>Apache Jena</span><span>SPARQL</span><span>RDFa</span></div>
+                    <div class="project-card__cta">
+                        <a href="https://e-book-q4i6.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
+                        <a href="https://github.com/drilonsaiti/E-book" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="projects__more reveal">
+            <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+                <i class="fa-brands fa-github" aria-hidden="true"></i> View all on GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact section-pad" id="contact" aria-labelledby="contactHeading">
+    <div class="container">
+        <div class="contact__inner">
+            <div class="contact__left reveal">
+                <div class="section-label">Contact</div>
+                <h2 class="section-heading" id="contactHeading">Let's build<br><em>something great</em></h2>
+                <p class="contact__body">I'm open to full-time roles, contract work, and interesting collaboration. Drop me a line and I'll respond within 24 hours.</p>
+                <div class="contact__links" aria-label="Contact options">
+                    <a href="/cdn-cgi/l/email-protection#d9bdabb0b5b6b7f4aab8b0adb099b1b6adb4b8b0b5f7bab6b4" class="contact__link">
+                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                        <span><span class="__cf_email__" data-cfemail="ed899f84818283c09e8c849984ad858299808c8481c38e8280">[email&#160;protected]</span></span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/drilon-saiti/" target="_blank" rel="noopener noreferrer" class="contact__link">
+                        <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                        <span>linkedin.com/in/drilon-saiti</span>
+                    </a>
+                    <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer" class="contact__link">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        <span>github.com/drilonsaiti</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact__right reveal" style="--delay:.2s">
+                <form class="contact-form" id="contactForm" action="https://formsubmit.co/b61156f524cb025e06290a4eed779a42" method="POST" novalidate aria-label="Contact form">
+                    <input type="hidden" name="_subject" value="New Message from Portfolio Contact Form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Name <span aria-hidden="true">*</span></label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required autocomplete="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName">Company</label>
+                            <input type="text" id="companyName" name="companyName" placeholder="Optional" autocomplete="organization">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <span aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message <span aria-hidden="true">*</span></label>
+                        <textarea id="message" name="message" placeholder="Tell me about your project or opportunity…" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--full">
+                        Send Message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <div class="footer__inner">
+            <p class="footer__copy"></p>
+            <nav class="footer__nav" aria-label="Footer navigation">
+                <a href="#hero">Top ↑</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
         </div>
     </div>
 </footer>
 
-<div id="contactModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <div class="modal-object">
-        <h3>Hey there!</h3>
-        <p>Please send me a message if you have any questions or comments.I will contact you through the email your provide me. Thank you!</p>
-            <form method="post" action="https://formsubmit.co/b61156f524cb025e06290a4eed779a42">
-            <input type="text" placeholder="Name" name="fullName" id="fullName">
-               <input type="text" placeholder="Company name (optional)" name="companyName" id="companyName">
-                <input type="email" placeholder="Email" name="email" id="email">
-                <textarea placeholder="Message" name="message" id="message"></textarea>
-                <input type="hidden" name="_subject" value="New Message from Contact Form!">
-                <div class="modal-buttons">
-                    <button id="close" class="btn btn-secondary ">Close</button>
-                    <button  id="contactBtns"  class="btn btn-primary">Contact me</button>
-                </div>
-
-            </form>
-        </div>
-    </div>
-
-</div>
 <script defer src="index.js"></script>
-
-
-
 </body>
 </html>
