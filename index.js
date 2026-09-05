@@ -319,6 +319,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const botcheck = contactForm.elements.botcheck;
+
+            if (botcheck?.checked) {
+                contactForm.reset();
+                setFormStatus(
+                    'Message sent. Thanks — I’ll get back to you soon.',
+                    'success'
+                );
+                return;
+            }
             setSubmitting(true);
             setFormStatus('Sending your message…');
 
