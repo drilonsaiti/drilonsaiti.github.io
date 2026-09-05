@@ -1,340 +1,354 @@
 'use strict';
 
-/* ─── THEME (runs before DOMContentLoaded to avoid flash) ── */
-(function initTheme() {
-    const saved = localStorage.getItem('ds-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', saved);
-})();
+document.addEventListener('DOMContentLoaded', () => {
+    const root = document.documentElement;
+    const body = document.body;
+    const header = document.getElementById('siteHeader');
+    const progress = document.getElementById('scrollProgress');
+    const themeToggle = document.getElementById('themeToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const commandTrigger = document.getElementById('commandTrigger');
+    const commandPalette = document.getElementById('commandPalette');
+    const commandInput = document.getElementById('commandInput');
+    const commandList = document.getElementById('commandList');
+    const commandEmpty = document.getElementById('commandEmpty');
+    const currentYear = document.getElementById('currentYear');
 
-document.addEventListener('DOMContentLoaded', function () {
+    if (currentYear) currentYear.textContent = new Date().getFullYear();
 
-    /* ════════════════════════════════════════════════════
-       1. THEME TOGGLE
-       ════════════════════════════════════════════════════ */
-    const themeBtn = document.getElementById('themeToggle');
-    if (themeBtn) {
-        themeBtn.addEventListener('click', function () {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
+    function updateThemeColor(theme) {
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0F0E0D' : '#F7F5F0');
+    }
+
+    updateThemeColor(root.dataset.theme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
             localStorage.setItem('ds-theme', next);
+            updateThemeColor(next);
         });
     }
 
-    /* ════════════════════════════════════════════════════
-       2. SCROLL PROGRESS BAR + BACK-TO-TOP
-       ════════════════════════════════════════════════════ */
-    const progressBar = document.getElementById('scrollProgress');
-    const backToTopBtn = document.getElementById('backToTop');
-    const nav = document.getElementById('nav');
-
-    function onScroll() {
+    function updateScrollUI() {
         const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-
-        if (progressBar) progressBar.style.width = pct + '%';
-        if (backToTopBtn) backToTopBtn.classList.toggle('visible', scrollTop > window.innerHeight * 0.4);
-        if (nav) nav.classList.toggle('scrolled', scrollTop > 20);
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
+        if (progress) progress.style.width = `${pct}%`;
+        if (header) header.classList.toggle('is-scrolled', scrollTop > 12);
     }
 
-    window.addEventListener('scroll', onScroll, {passive: true});
-    onScroll();
+    window.addEventListener('scroll', updateScrollUI, {passive: true});
+    updateScrollUI();
 
-    /* ─── CUSTOM SMOOTH SCROLL (easeInOutCubic) ─────── */
-    function smoothScrollTo(targetY, duration) {
-        const startY = window.scrollY;
-        const distance = targetY - startY;
-        let startTime = null;
-
-        function easeInOutCubic(t) {
-            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-        }
-
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const elapsed = timestamp - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            window.scrollTo(0, startY + distance * easeInOutCubic(progress));
-            if (progress < 1) requestAnimationFrame(step);
-        }
-
-        requestAnimationFrame(step);
+    function closeMobileMenu() {
+        if (!menuToggle || !mobileMenu) return;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation');
+        mobileMenu.classList.remove('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        mobileMenu.inert = true;
+        body.classList.remove('menu-open');
     }
 
-    /* ─── BACK TO TOP CLICK ──────────────────────────── */
-    if (backToTopBtn) {
-        backToTopBtn.addEventListener('click', function () {
-            smoothScrollTo(0, 700);
+    function openMobileMenu() {
+        if (!menuToggle || !mobileMenu) return;
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.setAttribute('aria-label', 'Close navigation');
+        mobileMenu.classList.add('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        mobileMenu.inert = false;
+        body.classList.add('menu-open');
+    }
+
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+            const open = menuToggle.getAttribute('aria-expanded') === 'true';
+            open ? closeMobileMenu() : openMobileMenu();
         });
+
+        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
     }
 
-    /* ════════════════════════════════════════════════════
-       3. SMOOTH SCROLL — all anchor links
-       ════════════════════════════════════════════════════ */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href').slice(1);
-            const target = document.getElementById(targetId);
-            if (!target) return;
-            e.preventDefault();
-            const top = target.getBoundingClientRect().top + window.scrollY - 72;
-            smoothScrollTo(top, 700);
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                revealObserver.unobserve(entry.target);
+            });
+        }, {rootMargin: '0px 0px -70px 0px', threshold: 0.05});
+        revealItems.forEach(item => revealObserver.observe(item));
+    } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+    }
+
+    const navTargets = [...document.querySelectorAll('[data-nav]')];
+    const trackedSections = navTargets
+        .map(link => document.getElementById(link.dataset.nav))
+        .filter(Boolean);
+
+    if ('IntersectionObserver' in window && navTargets.length) {
+        const sectionObserver = new IntersectionObserver(entries => {
+            const visible = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (!visible) return;
+            navTargets.forEach(link => link.classList.toggle('is-active', link.dataset.nav === visible.target.id));
+        }, {rootMargin: '-25% 0px -60% 0px', threshold: [0, 0.1, 0.5]});
+        trackedSections.forEach(section => sectionObserver.observe(section));
+    }
+
+    document.querySelectorAll('.case-study').forEach(caseStudy => {
+        const buttons = [...caseStudy.querySelectorAll('[data-mode-button]')];
+        const panels = [...caseStudy.querySelectorAll('[data-mode-panel]')];
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const mode = button.dataset.modeButton;
+                buttons.forEach(item => {
+                    const active = item === button;
+                    item.classList.toggle('is-active', active);
+                    item.setAttribute('aria-pressed', String(active));
+                });
+                panels.forEach(panel => {
+                    const active = panel.dataset.modePanel === mode;
+                    panel.classList.toggle('is-active', active);
+                    panel.hidden = !active;
+                });
+            });
         });
     });
 
-    /* ════════════════════════════════════════════════════
-       4. ACTIVE NAV LINK
-       ════════════════════════════════════════════════════ */
-    const sections = document.querySelectorAll('section[id], header[id]');
-    const navLinks = document.querySelectorAll('.nav__link');
-
-    const sectionObserver = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    navLinks.forEach(link => {
-                        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-                    });
-                }
-            });
-        },
-        {rootMargin: '-40% 0px -55% 0px'}
-    );
-    sections.forEach(s => sectionObserver.observe(s));
-
-    /* ════════════════════════════════════════════════════
-       5. HAMBURGER + MOBILE MENU
-          - full-screen slide-in from right
-          - staggered link entrance (CSS handles timing)
-          - close on outside click + Escape key
-       ════════════════════════════════════════════════════ */
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    function openMenu() {
-        mobileMenu.classList.add('open');
-        hamburger.classList.add('open');
-        hamburger.setAttribute('aria-expanded', 'true');
-        mobileMenu.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        mobileMenu.querySelectorAll('.nav__link').forEach(l => l.setAttribute('tabindex', '0'));
-    }
-
-    function closeMenu() {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        mobileMenu.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = '';
-        mobileMenu.querySelectorAll('.nav__link').forEach(l => l.setAttribute('tabindex', '-1'));
-    }
-
-    if (hamburger && mobileMenu) {
-        hamburger.addEventListener('click', function () {
-            mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
-        });
-
-        mobileMenu.querySelectorAll('.nav__link').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // Close on outside click
-        document.addEventListener('click', function (e) {
-            if (
-                mobileMenu.classList.contains('open') &&
-                !mobileMenu.contains(e.target) &&
-                !hamburger.contains(e.target)
-            ) closeMenu();
-        });
-
-        // Close on Escape
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-                closeMenu();
-                hamburger.focus();
-            }
-        });
-    }
-
-    /* ════════════════════════════════════════════════════
-       6. REVEAL ON SCROLL
-       ════════════════════════════════════════════════════ */
-    const revealEls = document.querySelectorAll('.reveal');
-
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            },
-            {threshold: 0, rootMargin: '0px 0px -60px 0px'}
-        );
-        revealEls.forEach(el => revealObserver.observe(el));
-    } else {
-        revealEls.forEach(el => el.classList.add('is-visible'));
-    }
-
-    /* ════════════════════════════════════════════════════
-       7. HERO ENTRANCE
-       ════════════════════════════════════════════════════ */
-    const heroContent = document.querySelector('.hero__content');
-    const heroImage = document.querySelector('.hero__image-frame');
-
-    if (heroContent) {
-        heroContent.style.cssText = 'opacity:0;transform:translateY(24px)';
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                heroContent.style.transition = 'opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1)';
-                heroContent.style.opacity = '1';
-                heroContent.style.transform = 'none';
-            }, 80);
-        });
-    }
-    if (heroImage) {
-        heroImage.style.cssText = 'opacity:0;transform:translateY(20px) scale(.97)';
-        setTimeout(() => {
-            heroImage.style.transition = 'opacity .8s cubic-bezier(.16,1,.3,1) .18s, transform .8s cubic-bezier(.16,1,.3,1) .18s';
-            heroImage.style.opacity = '1';
-            heroImage.style.transform = 'none';
-        }, 100);
-    }
-
-    /* ════════════════════════════════════════════════════
-       8. COUNTER ANIMATION
-       ════════════════════════════════════════════════════ */
-    function animateCounter(el, target, duration) {
-        duration = duration || 1400;
-        let start = null;
-
-        function easeOutQuart(t) {
-            return 1 - Math.pow(1 - t, 4);
+    async function copyText(value, feedbackTarget) {
+        try {
+            await navigator.clipboard.writeText(value);
+        } catch (_) {
+            const textarea = document.createElement('textarea');
+            textarea.value = value;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            textarea.remove();
         }
 
-        const step = function (ts) {
-            if (!start) start = ts;
-            const progress = Math.min((ts - start) / duration, 1);
-            const value = easeOutQuart(progress) * target;
-            el.textContent = target % 1 !== 0 ? value.toFixed(1) : Math.floor(value);
-            if (progress < 1) requestAnimationFrame(step);
-            else el.textContent = target;
-        };
-        requestAnimationFrame(step);
+        if (feedbackTarget) {
+            const previous = feedbackTarget.textContent;
+            feedbackTarget.textContent = 'Copied';
+            window.setTimeout(() => {
+                feedbackTarget.textContent = previous;
+            }, 1600);
+        }
     }
 
-    const statNums = document.querySelectorAll('.stats__num');
-    const statsObserver = new IntersectionObserver(
-        entries => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const el = entry.target;
-                const raw = el.textContent.replace(/[^0-9.]/g, '');
-                const target = parseFloat(raw);
-                const suffix = el.querySelector('span') ? el.querySelector('span').textContent : '';
-                if (!isNaN(target) && target > 0) {
-                    el.innerHTML = '0<span>' + suffix + '</span>';
-                    animateCounter(el.childNodes[0], target);
+    const copyEmailButton = document.getElementById('copyEmailBtn');
+    if (copyEmailButton) {
+        copyEmailButton.addEventListener('click', () => {
+            copyText(copyEmailButton.dataset.email, copyEmailButton.querySelector('.copy-feedback'));
+        });
+    }
+
+    let selectedCommandIndex = 0;
+    let lastFocusedElement = null;
+
+    function visibleCommandItems() {
+        if (!commandList) return [];
+        return [...commandList.querySelectorAll('button, a')].filter(item => !item.hidden);
+    }
+
+    function setSelectedCommand(index) {
+        const items = visibleCommandItems();
+        if (!items.length) return;
+        selectedCommandIndex = (index + items.length) % items.length;
+        items.forEach((item, idx) => item.classList.toggle('is-selected', idx === selectedCommandIndex));
+        items[selectedCommandIndex].scrollIntoView({block: 'nearest'});
+    }
+
+    function filterCommands(query) {
+        if (!commandList) return;
+        const normalized = query.trim().toLowerCase();
+        const allItems = [...commandList.querySelectorAll('button, a')];
+        allItems.forEach(item => {
+            const matches = !normalized || item.textContent.toLowerCase().includes(normalized);
+            item.hidden = !matches;
+        });
+        const visible = visibleCommandItems();
+        if (commandEmpty) commandEmpty.hidden = visible.length > 0;
+        selectedCommandIndex = 0;
+        setSelectedCommand(0);
+    }
+
+    function openCommandPalette() {
+        if (!commandPalette || !commandInput) return;
+        lastFocusedElement = document.activeElement;
+        commandPalette.inert = false;
+        commandPalette.classList.add('is-open');
+        commandPalette.setAttribute('aria-hidden', 'false');
+        body.classList.add('command-open');
+        commandInput.value = '';
+        filterCommands('');
+        window.setTimeout(() => commandInput.focus(), 10);
+    }
+
+    function closeCommandPalette() {
+        if (!commandPalette) return;
+        commandPalette.classList.remove('is-open');
+        commandPalette.setAttribute('aria-hidden', 'true');
+        commandPalette.inert = true;
+        body.classList.remove('command-open');
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
+    }
+
+    if (commandTrigger) commandTrigger.addEventListener('click', openCommandPalette);
+    if (commandPalette) {
+        commandPalette.querySelectorAll('[data-command-close]').forEach(el => el.addEventListener('click', closeCommandPalette));
+    }
+
+    if (commandInput) {
+        commandInput.addEventListener('input', () => filterCommands(commandInput.value));
+        commandInput.addEventListener('keydown', event => {
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                setSelectedCommand(selectedCommandIndex + 1);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                setSelectedCommand(selectedCommandIndex - 1);
+            } else if (event.key === 'Enter') {
+                event.preventDefault();
+                const items = visibleCommandItems();
+                if (items[selectedCommandIndex]) items[selectedCommandIndex].click();
+            }
+        });
+    }
+
+    if (commandList) {
+        commandList.addEventListener('mousemove', event => {
+            const item = event.target.closest('button, a');
+            if (!item || item.hidden) return;
+            const items = visibleCommandItems();
+            setSelectedCommand(items.indexOf(item));
+        });
+
+        commandList.addEventListener('click', event => {
+            const targetButton = event.target.closest('[data-command-target]');
+            const copyButton = event.target.closest('[data-copy-command]');
+
+            if (targetButton) {
+                const target = document.querySelector(targetButton.dataset.commandTarget);
+                closeCommandPalette();
+                if (target) window.setTimeout(() => target.scrollIntoView({behavior: 'smooth', block: 'start'}), 30);
+            }
+
+            if (copyButton) {
+                copyText(copyButton.dataset.copyCommand);
+                const small = copyButton.querySelector('small');
+                if (small) {
+                    const original = small.textContent;
+                    small.textContent = 'Copied to clipboard';
+                    window.setTimeout(() => {
+                        small.textContent = original;
+                    }, 1400);
                 }
-                statsObserver.unobserve(el);
-            });
-        },
-        {threshold: 0.5}
-    );
-    statNums.forEach(el => statsObserver.observe(el));
+            }
 
-    /* ════════════════════════════════════════════════════
-       9. CONTACT FORM VALIDATION
-       ════════════════════════════════════════════════════ */
-    const form = document.getElementById('contactForm');
-    if (form) {
-        const submitBtn = form.querySelector('[type="submit"]');
+            if (event.target.closest('a')) closeCommandPalette();
+        });
+    }
 
-        form.addEventListener('submit', function (e) {
-            const required = [
-                form.querySelector('#fullName'),
-                form.querySelector('#email'),
-                form.querySelector('#message'),
-            ].filter(Boolean);
-            let valid = true;
+    document.addEventListener('keydown', event => {
+        const commandShortcut = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k';
+        if (commandShortcut) {
+            event.preventDefault();
+            commandPalette && commandPalette.classList.contains('is-open') ? closeCommandPalette() : openCommandPalette();
+            return;
+        }
 
-            required.forEach(field => {
-                const ok = field.value.trim().length > 0;
-                field.style.borderColor = ok ? '' : '#e05252';
-                field.setAttribute('aria-invalid', String(!ok));
-                if (!ok) valid = false;
-            });
+        if (event.key === 'Escape') {
+            if (commandPalette && commandPalette.classList.contains('is-open')) closeCommandPalette();
+            else closeMobileMenu();
+        }
+    });
 
-            if (!valid) {
-                e.preventDefault();
-                const first = form.querySelector('[aria-invalid="true"]');
-                if (first) first.focus();
+    const contactForm = document.getElementById('contactForm');
+    const contactFormStatus = document.getElementById('contactFormStatus');
+
+    if (contactForm) {
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const submitLabel = contactForm.querySelector('.contact-form__button-label');
+        const defaultLabel = submitLabel ? submitLabel.textContent : 'Send message';
+
+        const setFormStatus = (message = '', type = '') => {
+            if (!contactFormStatus) return;
+            contactFormStatus.textContent = message;
+            contactFormStatus.classList.toggle('is-success', type === 'success');
+            contactFormStatus.classList.toggle('is-error', type === 'error');
+        };
+
+        const setSubmitting = submitting => {
+            if (submitButton) submitButton.disabled = submitting;
+            if (submitLabel) submitLabel.textContent = submitting ? 'Sending…' : defaultLabel;
+            contactForm.setAttribute('aria-busy', String(submitting));
+        };
+
+        contactForm.addEventListener('input', event => {
+            if (event.target.matches('input, textarea')) event.target.removeAttribute('aria-invalid');
+            if (contactFormStatus?.classList.contains('is-error')) setFormStatus();
+        });
+
+        contactForm.addEventListener('submit', async event => {
+            event.preventDefault();
+            setFormStatus();
+
+            const accessKey = contactForm.elements.access_key?.value?.trim();
+            if (!accessKey || accessKey === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+                setFormStatus('Contact form is not configured yet. Add the Web3Forms access key.', 'error');
                 return;
             }
-            if (submitBtn) {
-                submitBtn.innerHTML = 'Sending\u2026 <i class="fa-solid fa-circle-notch fa-spin"></i>';
-                submitBtn.disabled = true;
+
+            if (!contactForm.checkValidity()) {
+                const invalidFields = [...contactForm.querySelectorAll(':invalid')];
+                invalidFields.forEach(field => field.setAttribute('aria-invalid', 'true'));
+                invalidFields[0]?.focus();
+                setFormStatus('Please complete the required fields.', 'error');
+                return;
+            }
+
+            setSubmitting(true);
+            setFormStatus('Sending your message…');
+
+            try {
+                const formData = new FormData(contactForm);
+                const payload = Object.fromEntries(formData.entries());
+
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || 'Unable to send your message.');
+                }
+
+                contactForm.reset();
+                contactForm.querySelectorAll('[aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
+                setFormStatus('Message sent. Thanks — I’ll get back to you soon.', 'success');
+            } catch (error) {
+                console.error('Contact form submission failed:', error);
+                setFormStatus('Something went wrong. Please email me directly instead.', 'error');
+            } finally {
+                setSubmitting(false);
             }
         });
-
-        form.querySelectorAll('input, textarea').forEach(field => {
-            field.addEventListener('input', function () {
-                if (this.value.trim()) {
-                    this.style.borderColor = '';
-                    this.setAttribute('aria-invalid', 'false');
-                }
-            });
-        });
     }
-
-    /* ════════════════════════════════════════════════════
-       11. COPY EMAIL TO CLIPBOARD
-       ════════════════════════════════════════════════════ */
-    const copyBtn = document.getElementById('copyEmailBtn');
-    if (copyBtn) {
-        const email = 'drilon-saiti@hotmail.com';
-        const feedback = copyBtn.querySelector('.copy-email__feedback');
-
-        copyBtn.addEventListener('click', function () {
-            navigator.clipboard.writeText(email).then(function () {
-                feedback.textContent = 'Copied!';
-                copyBtn.classList.add('copied');
-                clearTimeout(copyBtn._resetTimer);
-                copyBtn._resetTimer = setTimeout(function () {
-                    copyBtn.classList.remove('copied');
-                    feedback.textContent = '';
-                }, 2200);
-            }).catch(function () {
-                // Fallback for older browsers
-                const ta = document.createElement('textarea');
-                ta.value = email;
-                ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                feedback.textContent = 'Copied!';
-                copyBtn.classList.add('copied');
-                clearTimeout(copyBtn._resetTimer);
-                copyBtn._resetTimer = setTimeout(function () {
-                    copyBtn.classList.remove('copied');
-                    feedback.textContent = '';
-                }, 2200);
-            });
-        });
-    }
-
-
-    /* ════════════════════════════════════════════════════
-       10. DYNAMIC FOOTER YEAR
-       ════════════════════════════════════════════════════ */
-    const footerCopy = document.querySelector('.footer__copy');
-    if (footerCopy) {
-        footerCopy.textContent = '\u00A9 ' + new Date().getFullYear() + ' Drilon Saiti \u2014 Built with care.';
-    }
-
 });

@@ -3,28 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Drilon Saiti — Full-stack Engineer specializing in React, Spring Boot, and Laravel. Building production-ready systems for e-commerce, CRM/ERP, and subscription platforms.">
+    <meta name="description" content="Drilon Saiti is a full-stack engineer building production SaaS, e-commerce and business systems with React, Laravel, Java and PostgreSQL.">
     <meta name="author" content="Drilon Saiti">
-    <meta name="keywords" content="Drilon Saiti, Full-stack Web Developer, React, Spring Boot, Laravel, Java, JavaScript, Skopje, NDRIT GmbH/MediaSoft">
+    <meta name="theme-color" content="#F7F5F0">
+
     <meta property="og:title" content="Drilon Saiti | Full-stack Engineer">
-    <meta property="og:description" content="Full-stack Engineer with production experience in e-commerce, CRM/ERP and subscription platforms.">
+    <meta property="og:description" content="Production software across SaaS, e-commerce and business systems. Selected work by full-stack engineer Drilon Saiti.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://drilonsaiti.github.io/">
     <meta property="og:image" content="https://drilonsaiti.github.io/Drilon-Saiti.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Drilon Saiti | Full-stack Engineer">
-    <meta name="twitter:description" content="Portfolio of Full-stack Engineer Drilon Saiti – projects, experience and tech stack.">
+    <meta name="twitter:description" content="Production software across SaaS, e-commerce and business systems.">
     <meta name="twitter:image" content="https://drilonsaiti.github.io/Drilon-Saiti.webp">
-    <title>Drilon Saiti — Full-stack Engineer</title>
 
+    <title>Drilon Saiti | Full-stack Engineer</title>
     <link rel="canonical" href="https://drilonsaiti.github.io/">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <script>
+        (function () {
+            var saved = localStorage.getItem('ds-theme');
+            var preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.dataset.theme = saved || preferred;
+        })();
+    </script>
 
     <script type="application/ld+json">
         {
@@ -34,7 +41,7 @@
             "jobTitle": "Full-stack Engineer",
             "url": "https://drilonsaiti.github.io/",
             "image": "https://drilonsaiti.github.io/Drilon-Saiti.webp",
-            "knowsAbout": ["Java", "Spring Boot", "React", "Laravel", "PHP", "MySQL", "PostgreSQL", "Docker"],
+            "knowsAbout": ["React", "TypeScript", "Java", "Spring Boot", "Laravel", "PHP", "PostgreSQL", "MySQL", "Docker"],
             "sameAs": [
                 "https://github.com/drilonsaiti",
                 "https://www.linkedin.com/in/drilon-saiti/"
@@ -43,684 +50,570 @@
     </script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-<!-- NAV -->
-<!-- Scroll progress bar -->
-<div class="scroll-progress" id="scrollProgress" role="progressbar" aria-hidden="true"></div>
+<header class="site-header" id="siteHeader">
+    <nav class="nav container" aria-label="Main navigation">
+        <a class="brand" href="#hero" aria-label="Drilon Saiti, home">
+            <span class="brand__mark">DS</span>
+            <span class="brand__name">Drilon Saiti</span>
+        </a>
 
-<!-- Back to top -->
-<button class="back-to-top" id="backToTop" aria-label="Scroll back to top" title="Back to top">
-    <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
-</button>
+        <div class="nav__links" id="desktopNav">
+            <a href="#work" data-nav="work">Work</a>
+            <a href="#experience" data-nav="experience">Experience</a>
+            <a href="#capabilities" data-nav="capabilities">Capabilities</a>
+            <a href="#about" data-nav="about">About</a>
+        </div>
 
-<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav__inner">
-        <a href="#hero" class="nav__logo" aria-label="Drilon Saiti — home">DS</a>
-        <ul class="nav__links" role="list">
-            <li><a href="#about" class="nav__link">About</a></li>
-            <li><a href="#experience" class="nav__link">Experience</a></li>
-            <li><a href="#skills" class="nav__link">Skills</a></li>
-            <li><a href="#projects" class="nav__link">Projects</a></li>
-            <li><a href="#contact" class="nav__link">Contact</a></li>
-        </ul>
         <div class="nav__actions">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
-        <span class="theme-toggle__icon theme-toggle__icon--sun">
-          <i class="fa-solid fa-sun" aria-hidden="true"></i>
-        </span>
-                <span class="theme-toggle__icon theme-toggle__icon--moon">
-          <i class="fa-solid fa-moon" aria-hidden="true"></i>
-        </span>
+            <button class="icon-button command-trigger" id="commandTrigger" type="button" aria-label="Open command palette" title="Open command palette">
+                <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
             </button>
-            <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-                <span></span><span></span><span></span>
+            <button class="icon-button theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+                <span class="theme-toggle__light"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></span>
+                <span class="theme-toggle__dark"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
+            </button>
+            <a class="nav__cta" href="#contact">Let's talk</a>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open navigation">
+                <span class="menu-toggle__open"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="8" y2="8"></line><line x1="4" x2="20" y1="16" y2="16"></line></svg></span>
+                <span class="menu-toggle__close"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></span>
             </button>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <ul role="list">
-        <li><a href="#about" class="nav__link" tabindex="-1">About</a></li>
-        <li><a href="#experience" class="nav__link" tabindex="-1">Experience</a></li>
-        <li><a href="#skills" class="nav__link" tabindex="-1">Skills</a></li>
-        <li><a href="#projects" class="nav__link" tabindex="-1">Projects</a></li>
-        <li><a href="#contact" class="nav__link" tabindex="-1">Contact</a></li>
-    </ul>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="hero" aria-labelledby="heroHeading">
-    <div class="hero__bg-text" aria-hidden="true">FULL-STACK</div>
-    <div class="hero__inner">
-        <div class="hero__content">
-            <p class="hero__eyebrow">Available for new opportunities</p>
-            <h1 class="hero__name" id="heroHeading">
-                Drilon<br><em>Saiti</em>
-            </h1>
-            <p class="hero__role">Full-stack Engineer</p>
-            <p class="hero__tagline">I build production-ready systems that scale — from pixel-precise interfaces to resilient server architecture.</p>
-            <div class="hero__actions">
-                <a href="Drilon-Saiti-CV.pdf" download="Drilon-Saiti-CV" class="btn btn--primary">
-                    <i class="fa-solid fa-arrow-down" aria-hidden="true"></i> Download CV
-                </a>
-                <a href="#contact" class="btn btn--ghost">Let's talk</a>
-            </div>
-            <div class="hero__social" aria-label="Social links">
-                <a href="https://www.linkedin.com/in/drilon-saiti/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                    <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                </a>
-                <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                    <i class="fa-brands fa-github" aria-hidden="true"></i>
-                </a>
-                <a href="https://x.com/drilons6" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
-                    <i class="fa-brands fa-square-x-twitter" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-        <div class="hero__image-wrap">
-            <div class="hero__image-frame" aria-hidden="true">
-                <img src="Drilon-Saiti.webp" alt="Drilon Saiti" class="hero__image" width="420" height="520" loading="eager">
-                <div class="hero__image-deco hero__image-deco--1"></div>
-                <div class="hero__image-deco hero__image-deco--2"></div>
-            </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true" inert>
+        <div class="container mobile-menu__inner">
+            <a href="#work">Work</a>
+            <a href="#experience">Experience</a>
+            <a href="#capabilities">Capabilities</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
         </div>
     </div>
-    <div class="hero__scroll-hint" aria-hidden="true">
-        <span>scroll</span>
-        <div class="hero__scroll-line"></div>
-    </div>
-</section>
+</header>
 
-<!-- STATS -->
-<section class="stats" aria-label="Key stats">
-    <div class="stats__inner">
-        <div class="stats__item reveal">
-            <strong class="stats__num">760<span>+</span></strong>
-            <span class="stats__label">GitHub Contributions</span>
-        </div>
-        <div class="stats__item reveal" style="--delay:.1s">
-            <strong class="stats__num">2<span>+</span></strong>
-            <span class="stats__label">Years Experience</span>
-        </div>
-        <div class="stats__item reveal" style="--delay:.2s">
-            <strong class="stats__num">10<span>+</span></strong>
-            <span class="stats__label">Projects Shipped</span>
-        </div>
-        <div class="stats__item reveal" style="--delay:.3s">
-            <strong class="stats__num">8<span>+</span></strong>
-            <span class="stats__label">Technologies</span>
-        </div>
-    </div>
-</section>
+<main id="main">
+    <section class="hero" id="hero" aria-labelledby="heroTitle">
+        <div class="hero__grid container">
+            <div class="hero__content">
+                <div class="availability"><span aria-hidden="true"></span> Available for selected opportunities</div>
+                <p class="kicker">Full-stack engineer · Product-minded developer</p>
+                <h1 id="heroTitle">I build software that makes it to <em>production.</em></h1>
+                <p class="hero__lede">SaaS, e-commerce and business systems built end to end with React, Laravel, Java and PostgreSQL. I care about the product, the architecture and what happens after deploy.</p>
 
-<!-- ABOUT -->
-<section class="about section-pad" id="about" aria-labelledby="aboutHeading">
-    <div class="container">
-        <div class="section-label reveal">About</div>
-        <div class="about__grid">
-            <div class="about__left reveal">
-                <h2 class="section-heading" id="aboutHeading">I ship code that <em>matters</em></h2>
+                <div class="hero__actions">
+                    <a class="button button--primary" href="#work">View selected work <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="m19 12-7 7-7-7"></path></svg></a>
+                    <a class="button button--secondary" href="Drilon-Saiti-CV.pdf" download="Drilon-Saiti-CV">Download CV <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></a>
+                </div>
+
+                <div class="hero__meta" aria-label="Profile links and location">
+                    <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer">GitHub <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                    <a href="https://www.linkedin.com/in/drilon-saiti/" target="_blank" rel="noopener noreferrer">LinkedIn <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                    <span>Skopje · Remote</span>
+                </div>
             </div>
-            <div class="about__right reveal" style="--delay:.15s">
-                <p class="about__lead">Full-stack Engineer at NDRIT GmbH/MediaSoft, building real products for real businesses — from architecture through to deployment.</p>
-                <p class="about__body">My strengths span React, Java Spring Boot and Laravel. I've contributed to production e-commerce platforms, CRM/ERP systems, and subscription services used daily by businesses. 760+ GitHub contributions, a Computer Science graduation from FINKI (FCSE), and a genuine obsession with well-crafted, performant code.</p>
-                <ul class="about__chips" aria-label="Key traits">
-                    <li>Full-stack</li>
-                    <li>Performance-first</li>
-                    <li>Production-grade</li>
-                    <li>CS-educated</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- EXPERIENCE -->
-<section class="experience section-pad" id="experience" aria-labelledby="expHeading">
-    <div class="container">
-        <div class="section-label reveal">Experience</div>
-        <h2 class="section-heading reveal" id="expHeading">Where I've worked</h2>
-
-        <div class="timeline" role="list">
-
-            <article class="timeline__item reveal" role="listitem">
-                <div class="timeline__marker" aria-hidden="true"></div>
-                <div class="timeline__body">
-                    <div class="timeline__header">
-                        <div>
-                            <h3 class="timeline__role">Full-stack Web Developer</h3>
-                            <p class="timeline__company">NDRIT GmbH/MediaSoft &nbsp;·&nbsp; Remote</p>
-                        </div>
-                        <time class="timeline__date" datetime="2024/2025">2024 – 2026</time>
-                    </div>
-                    <ul class="timeline__bullets">
-                        <li>Engineered core features across live e-commerce, CRM/ERP, and subscription platforms serving active business clients</li>
-                        <li>Architected third-party integrations and payment workflows that reduced checkout failure rates</li>
-                        <li>Delivered data-driven features and complex business logic from initial spec to production deployment</li>
-                        <li>Maintained 760+ GitHub contributions, consistently owning features end-to-end across the full stack</li>
-                    </ul>
-                    <div class="timeline__tech" aria-label="Technologies used">
-                        <span>React</span><span>Spring Boot</span><span>Laravel</span><span>MySQL</span><span>PostgreSQL</span><span>Docker</span>
+            <div class="hero__aside">
+                <div class="portrait-shell">
+                    <img src="Drilon-Saiti.webp" alt="Portrait of Drilon Saiti" class="portrait" width="420" height="520" loading="eager" fetchpriority="high">
+                    <div class="portrait-shell__caption">
+                        <span class="mono">CURRENTLY</span>
+                        <strong>Independent Full-stack Developer</strong>
+                        <span>Open to full-time opportunities</span>
                     </div>
                 </div>
-            </article>
+            </div>
+        </div>
 
-            <article class="timeline__item reveal" style="--delay:.15s" role="listitem">
-                <div class="timeline__marker" aria-hidden="true"></div>
-                <div class="timeline__body">
-                    <div class="timeline__header">
-                        <div>
-                            <h3 class="timeline__role">Intern Web Developer</h3>
-                            <p class="timeline__company">PurpleDot &nbsp;·&nbsp; Skopje</p>
-                        </div>
-                        <time class="timeline__date" datetime="2023/2024">2023 – 2024</time>
-                    </div>
-                    <ul class="timeline__bullets">
-                        <li>Applied systematic problem-solving to unblock critical project blockers under tight deadlines</li>
-                        <li>Collaborated across cross-functional teams, improving communication between development and product</li>
-                        <li>Delivered high-quality work that met client standards and demonstrated production readiness</li>
-                    </ul>
-                    <div class="timeline__tech" aria-label="Technologies used">
-                        <span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Git</span>
-                    </div>
+        <div class="proof-strip" aria-label="Areas of production experience">
+            <div class="container proof-strip__inner">
+                <span class="mono proof-strip__label">SHIPPED ACROSS</span>
+                <span>Production SaaS</span>
+                <span>E-commerce</span>
+                <span>Multi-tenant systems</span>
+                <span>Payments</span>
+                <span>Business applications</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="work section" id="work" aria-labelledby="workTitle">
+        <div class="container">
+            <header class="section-intro reveal">
+                <div>
+                    <p class="section-label">01 / Selected work</p>
+                    <h2 id="workTitle">Production work, not tutorial projects.</h2>
                 </div>
-            </article>
+                <p>Three production projects that best represent how I solve product and engineering problems. Switch each case between product context and engineering detail.</p>
+            </header>
 
-        </div>
-    </div>
-</section>
-
-<!-- SKILLS -->
-<section class="skills section-pad" id="skills" aria-labelledby="skillsHeading">
-    <div class="container">
-        <div class="section-label reveal">Skills</div>
-        <h2 class="section-heading reveal" id="skillsHeading">Tech stack</h2>
-
-        <div class="skills__grid">
-
-            <div class="skills__category reveal">
-                <h3 class="skills__cat-title">Frontend</h3>
-                <ul class="skills__list" role="list">
-                    <li><i class="devicon-react-original colored" aria-hidden="true"></i> React</li>
-                    <li><i class="devicon-javascript-plain colored" aria-hidden="true"></i> JavaScript</li>
-                    <li><i class="devicon-typescript-plain colored" aria-hidden="true"></i> TypeScript</li>
-                    <li><i class="devicon-html5-plain colored" aria-hidden="true"></i> HTML5</li>
-                    <li><i class="devicon-css3-plain colored" aria-hidden="true"></i> CSS3</li>
-                    <li><i class="devicon-tailwindcss-plain colored" aria-hidden="true"></i> Tailwind</li>
-                </ul>
-            </div>
-
-            <div class="skills__category reveal" style="--delay:.1s">
-                <h3 class="skills__cat-title">Backend</h3>
-                <ul class="skills__list" role="list">
-                    <li><i class="devicon-java-plain colored" aria-hidden="true"></i> Java</li>
-                    <li><i class="devicon-spring-plain colored" aria-hidden="true"></i> Spring Boot</li>
-                    <li><i class="devicon-laravel-plain colored" aria-hidden="true"></i> Laravel</li>
-                    <li><i class="devicon-php-plain colored" aria-hidden="true"></i> PHP</li>
-                    <li><i class="devicon-nodejs-plain colored" aria-hidden="true"></i> Node.js</li>
-                    <li><i class="devicon-python-plain colored" aria-hidden="true"></i> Python</li>
-                </ul>
-            </div>
-
-            <div class="skills__category reveal" style="--delay:.2s">
-                <h3 class="skills__cat-title">Database</h3>
-                <ul class="skills__list" role="list">
-                    <li><i class="devicon-postgresql-plain colored" aria-hidden="true"></i> PostgreSQL</li>
-                    <li><i class="devicon-mysql-plain colored" aria-hidden="true"></i> MySQL</li>
-                    <li><i class="devicon-mongodb-plain colored" aria-hidden="true"></i> MongoDB</li>
-                    <li><i class="devicon-redis-plain colored" aria-hidden="true"></i> Redis</li>
-                </ul>
-            </div>
-
-            <div class="skills__category reveal" style="--delay:.3s">
-                <h3 class="skills__cat-title">DevOps &amp; Tools</h3>
-                <ul class="skills__list" role="list">
-                    <li><i class="devicon-docker-plain colored" aria-hidden="true"></i> Docker</li>
-                    <li><i class="devicon-git-plain colored" aria-hidden="true"></i> Git</li>
-                    <li><i class="devicon-github-original" aria-hidden="true"></i> GitHub</li>
-                    <li><i class="devicon-linux-plain" aria-hidden="true"></i> Linux</li>
-                    <li><i class="devicon-intellij-plain colored" aria-hidden="true"></i> IntelliJ</li>
-                    <li><i class="devicon-vscode-plain colored" aria-hidden="true"></i> VS Code</li>
-                </ul>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects section-pad" id="projects" aria-labelledby="projectsHeading">
-    <div class="container">
-        <div class="section-label reveal">Projects</div>
-        <h2 class="section-heading reveal" id="projectsHeading">Selected work</h2>
-
-        <!-- ── TIER 1: PROFESSIONAL ─────────────────────── -->
-        <div class="projects__tier-label reveal">
-      <span class="tier-badge tier-badge--pro">
-        <i class="fa-solid fa-briefcase" aria-hidden="true"></i> Professional — shipped at NDRIT GmbH/MediaSoft
-      </span>
-        </div>
-
-        <div class="projects__grid">
-
-            <!-- Pro 1: adziko.mk + reifenpower.ch -->
-            <article class="project-card reveal" aria-labelledby="proj1Title">
-                <div class="project-card__image-wrap">
-                    <div class="project-card__browser-frame" aria-hidden="true">
-                        <div class="browser-bar">
-                            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
-                            <span class="browser-url">adziko.mk</span>
+            <div class="case-list">
+                <article class="case-study reveal" data-case="teamguider" aria-labelledby="teamguiderTitle">
+                    <div class="case-study__visual system-map system-map--teamguider" aria-label="TeamGuider architecture overview">
+                        <div class="system-map__topline">
+                            <span class="mono">01 / SaaS</span>
+                            <span class="status-pill">Production · Paying users</span>
                         </div>
-                        <div class="browser-body browser-body--ecom">
-                            <div class="mock-hero-bar"></div>
-                            <div class="mock-nav"><span></span><span></span><span></span><span></span></div>
-                            <div class="mock-grid">
-                                <div class="mock-card"></div><div class="mock-card"></div>
-                                <div class="mock-card"></div><div class="mock-card"></div>
-                                <div class="mock-card"></div><div class="mock-card"></div>
+                        <div class="system-map__canvas">
+                            <div class="system-node system-node--primary"><span>React</span><small>Product UI</small></div>
+                            <div class="system-arrow"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+                            <div class="system-node"><span>NestJS</span><small>API & logic</small></div>
+                            <div class="system-arrow"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+                            <div class="system-node"><span>PostgreSQL</span><small>Core data</small></div>
+                            <div class="system-node system-node--satellite system-node--ai"><span>AI</span><small>SOP generation</small></div>
+                            <div class="system-node system-node--satellite system-node--stripe"><span>Stripe</span><small>Subscriptions</small></div>
+                        </div>
+                        <div class="system-map__footer mono">ACCESS · QUIZZES · ANALYTICS · BILLING · COLLABORATION</div>
+                    </div>
+
+                    <div class="case-study__content">
+                        <div class="case-study__eyebrow">
+                            <span class="mono">TEAMGUIDER</span>
+                            <a href="https://teamguider.com" target="_blank" rel="noopener noreferrer">Live site <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                        </div>
+                        <h3 id="teamguiderTitle">AI-powered SOP and playbook SaaS</h3>
+                        <p class="case-study__summary">A subscription product that helps teams turn operational knowledge into structured SOPs, playbooks, quizzes and shared processes.</p>
+
+                        <div class="mode-switch" role="group" aria-label="TeamGuider case study view">
+                            <button type="button" class="is-active" data-mode-button="product" aria-pressed="true">Product</button>
+                            <button type="button" data-mode-button="engineering" aria-pressed="false">Engineering</button>
+                        </div>
+
+                        <div class="case-study__panel is-active" data-mode-panel="product">
+                            <dl class="case-details">
+                                <div><dt>Problem</dt><dd>Operational knowledge gets buried in chat, documents and tribal memory, making onboarding and process consistency difficult.</dd></div>
+                                <div><dt>What I built</dt><dd>Core product flows for AI-assisted SOP creation, team collaboration, access control, quizzes, analytics and subscription billing.</dd></div>
+                                <div><dt>Outcome</dt><dd>A live SaaS product used by paying business customers with Pro and Enterprise subscription flows.</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="case-study__panel" data-mode-panel="engineering" hidden>
+                            <dl class="case-details">
+                                <div><dt>Frontend</dt><dd>React application with reusable product UI and role-aware workflows.</dd></div>
+                                <div><dt>Backend</dt><dd>NestJS APIs supporting business logic, access control and AI-assisted content workflows.</dd></div>
+                                <div><dt>Platform</dt><dd>PostgreSQL for product data, Stripe for subscriptions and AI integration for SOP generation.</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="tag-list" aria-label="TeamGuider technologies">
+                            <span>React</span><span>NestJS</span><span>PostgreSQL</span><span>Stripe</span><span>AI integration</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="case-study case-study--reverse reveal" data-case="commerce" aria-labelledby="commerceTitle">
+                    <div class="case-study__visual system-map system-map--commerce" aria-label="E-commerce platform architecture overview">
+                        <div class="system-map__topline">
+                            <span class="mono">02 / COMMERCE</span>
+                            <span class="status-pill">Production · 2 markets</span>
+                        </div>
+                        <div class="system-map__canvas system-map__canvas--commerce">
+                            <div class="system-node system-node--primary"><span>Storefront</span><small>Customer journey</small></div>
+                            <div class="system-arrow"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+                            <div class="system-node"><span>Laravel</span><small>Commerce logic</small></div>
+                            <div class="system-arrow"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+                            <div class="system-node"><span>MySQL</span><small>Products & orders</small></div>
+                            <div class="system-node system-node--satellite system-node--payment"><span>Payments</span><small>Checkout</small></div>
+                            <div class="system-node system-node--satellite system-node--admin"><span>Admin</span><small>Inventory</small></div>
+                        </div>
+                        <div class="system-map__footer mono">CATALOGUE · CART · CHECKOUT · ORDERS · INVENTORY</div>
+                    </div>
+
+                    <div class="case-study__content">
+                        <div class="case-study__eyebrow">
+                            <span class="mono">ADZIKO.MK + REIFENPOWER.CH</span>
+                            <div class="case-study__links">
+                                <a href="https://adziko.mk" target="_blank" rel="noopener noreferrer">Adziko <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                                <a href="https://reifenpower.ch" target="_blank" rel="noopener noreferrer">Reifenpower <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="project-card__image-overlay" aria-hidden="true"></div>
-                </div>
-                <div class="project-card__body">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">01</span>
-                        <div class="project-card__links" aria-label="Project links">
-                            <a href="https://adziko.mk" target="_blank" rel="noopener noreferrer" aria-label="Visit adziko.mk" title="adziko.mk">
-                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://reifenpower.ch" target="_blank" rel="noopener noreferrer" aria-label="Visit reifenpower.ch" title="reifenpower.ch">
-                                <i class="fa-solid fa-globe" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-card__pro-badge">
-                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production · 2 markets
-                    </div>
-                    <h3 class="project-card__title" id="proj1Title">E-Commerce Platforms</h3>
-                    <p class="project-card__subtitle">adziko.mk &nbsp;·&nbsp; reifenpower.ch</p>
-                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
+                        <h3 id="commerceTitle">E-commerce systems for two real markets</h3>
+                        <p class="case-study__summary">Two separate retail businesses with different catalogues and operating needs, both requiring reliable customer and admin workflows.</p>
 
-                    <div class="project-card__psr">
-                        <div class="psr-item">
-                            <span class="psr-label">Problem</span>
-                            <p>Two separate retail businesses — a Macedonian home goods chain and a Swiss tyre retailer — needed full-featured e-commerce systems built to production quality.</p>
+                        <div class="mode-switch" role="group" aria-label="E-commerce case study view">
+                            <button type="button" class="is-active" data-mode-button="product" aria-pressed="true">Product</button>
+                            <button type="button" data-mode-button="engineering" aria-pressed="false">Engineering</button>
                         </div>
-                        <div class="psr-item">
-                            <span class="psr-label">Solution</span>
-                            <p>Engineered multi-category storefronts with product management, cart and checkout flows, payment integrations, and admin dashboards for live inventory control.</p>
+
+                        <div class="case-study__panel is-active" data-mode-panel="product">
+                            <dl class="case-details">
+                                <div><dt>Problem</dt><dd>Retailers needed production-ready online sales flows, catalogue management and day-to-day inventory control.</dd></div>
+                                <div><dt>What I built</dt><dd>Storefront features, product management, cart and checkout workflows, payment integrations and admin tooling.</dd></div>
+                                <div><dt>Outcome</dt><dd>Both platforms are live and actively serve customers in Macedonia and Switzerland.</dd></div>
+                            </dl>
                         </div>
-                        <div class="psr-item">
-                            <span class="psr-label">Result</span>
-                            <p>Both platforms are live and actively serving customers — adziko.mk across Macedonia, reifenpower.ch handling Swiss tyre orders with full payment processing.</p>
+
+                        <div class="case-study__panel" data-mode-panel="engineering" hidden>
+                            <dl class="case-details">
+                                <div><dt>Application</dt><dd>Laravel-based commerce logic with React-powered interface work across customer and admin experiences.</dd></div>
+                                <div><dt>Integrations</dt><dd>REST APIs and payment workflows supporting reliable checkout and business operations.</dd></div>
+                                <div><dt>Data</dt><dd>MySQL-backed product, inventory, customer and order flows designed around real operational use.</dd></div>
+                            </dl>
                         </div>
+
+                        <div class="tag-list" aria-label="E-commerce technologies">
+                            <span>Laravel</span><span>React</span><span>MySQL</span><span>Payments</span><span>REST API</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="case-study reveal" data-case="autoscout" aria-labelledby="autoscoutTitle">
+                    <div class="case-study__visual system-map system-map--autoscout" aria-label="AutoScout24 WordPress integration architecture overview">
+                        <div class="system-map__topline">
+                            <span class="mono">03 / WORDPRESS PLUGIN</span>
+                            <span class="status-pill">Production · Live inventory</span>
+                        </div>
+                        <div class="system-map__canvas system-map__canvas--autoscout">
+                            <div class="system-node system-node--primary"><span>AutoScout24</span><small>Inventory API</small></div>
+                            <div class="system-arrow"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+                            <div class="system-node"><span>WordPress</span><small>Custom PHP plugin</small></div>
+                            <div class="system-arrow"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></div>
+                            <div class="system-node"><span>Local DB</span><small>Vehicle inventory</small></div>
+                            <div class="system-node system-node--satellite system-node--cron"><span>WP-Cron</span><small>Scheduled sync</small></div>
+                            <div class="system-node system-node--satellite system-node--locale"><span>DE / FR</span><small>Search & filters</small></div>
+                        </div>
+                        <div class="system-map__footer mono">SERVER-SIDE AUTH · LOCAL CACHE · FILTERS · ELEMENTOR · SCHEDULED SYNC</div>
                     </div>
 
-                    <div class="project-card__stack" aria-label="Tech stack">
-                        <span>Laravel</span><span>React</span><span>MySQL</span><span>Stripe</span><span>REST API</span>
-                    </div>
-                    <div class="project-card__cta">
-                        <a href="https://adziko.mk" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
-                            <i class="fa-solid fa-eye" aria-hidden="true"></i> adziko.mk
-                        </a>
-                        <a href="https://reifenpower.ch" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-                            <i class="fa-solid fa-eye" aria-hidden="true"></i> reifenpower.ch
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Pro 2: TeamGuider -->
-            <article class="project-card project-card--reverse reveal" style="--delay:.1s" aria-labelledby="proj2Title">
-                <div class="project-card__image-wrap">
-                    <div class="project-card__browser-frame" aria-hidden="true">
-                        <div class="browser-bar">
-                            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
-                            <span class="browser-url">app.teamguider.com</span>
-                        </div>
-                        <div class="browser-body browser-body--saas">
-                            <div class="mock-sidebar">
-                                <div class="mock-sidebar-item active"></div>
-                                <div class="mock-sidebar-item"></div>
-                                <div class="mock-sidebar-item"></div>
-                                <div class="mock-sidebar-item"></div>
-                            </div>
-                            <div class="mock-main">
-                                <div class="mock-heading-bar"></div>
-                                <div class="mock-block"></div>
-                                <div class="mock-block mock-block--sm"></div>
-                                <div class="mock-row">
-                                    <div class="mock-pill"></div><div class="mock-pill"></div><div class="mock-pill"></div>
-                                </div>
+                    <div class="case-study__content">
+                        <div class="case-study__eyebrow">
+                            <span class="mono">AZIRI AUTOMOBILE</span>
+                            <div class="case-study__links">
+                                <a href="https://aziriautomobile.ch/fahrzeuge/" target="_blank" rel="noopener noreferrer">Live inventory <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                                <a href="https://www.linkedin.com/posts/drilon-saiti_wordpress-php-autoscout24-activity-7498468956358287360-gv0F" target="_blank" rel="noopener noreferrer">Build note <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
                             </div>
                         </div>
+                        <h3 id="autoscoutTitle">AutoScout24 inventory as a native WordPress experience</h3>
+                        <p class="case-study__summary">A custom plugin that synchronises dealership inventory into WordPress so the website owns the browsing experience instead of relying on an iframe or manually maintained listings.</p>
+
+                        <div class="mode-switch" role="group" aria-label="AutoScout24 integration case study view">
+                            <button type="button" class="is-active" data-mode-button="product" aria-pressed="true">Product</button>
+                            <button type="button" data-mode-button="engineering" aria-pressed="false">Engineering</button>
+                        </div>
+
+                        <div class="case-study__panel is-active" data-mode-panel="product">
+                            <dl class="case-details">
+                                <div><dt>Problem</dt><dd>Embedded or manually maintained vehicle listings gave the dealership limited control over UX, filtering and multilingual presentation.</dd></div>
+                                <div><dt>What I built</dt><dd>Automatic inventory sync, advanced vehicle search and filters, responsive cards and lists, German and French support, and Elementor-compatible rendering.</dd></div>
+                                <div><dt>Outcome</dt><dd>The live website keeps its inventory current automatically while retaining full control over the frontend experience.</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="case-study__panel" data-mode-panel="engineering" hidden>
+                            <dl class="case-details">
+                                <div><dt>Sync layer</dt><dd>Server-side AutoScout24 authentication and scheduled WordPress Cron jobs keep the local inventory in sync.</dd></div>
+                                <div><dt>Data flow</dt><dd>Vehicle data is stored locally in WordPress, so normal visitor traffic reads local data instead of repeatedly calling the upstream API.</dd></div>
+                                <div><dt>Security</dt><dd>API credentials remain server-side and never need to be exposed to website visitors or frontend JavaScript.</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="tag-list" aria-label="AutoScout24 WordPress integration technologies">
+                            <span>WordPress</span><span>PHP</span><span>AutoScout24 API</span><span>WP-Cron</span><span>DE / FR</span>
+                        </div>
                     </div>
-                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+                </article>
+            </div>
+
+            <div class="more-work reveal">
+                <div class="more-work__intro">
+                    <p class="section-label">More production work</p>
+                    <h3>Other systems shipped with NDRIT GmbH / MediaSoft</h3>
                 </div>
-                <div class="project-card__body">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">02</span>
-                        <div class="project-card__links" aria-label="Project links">
-                            <a href="https://teamguider.com" target="_blank" rel="noopener noreferrer" aria-label="Visit TeamGuider" title="teamguider.com">
-                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://app.teamguider.com/login" target="_blank" rel="noopener noreferrer" aria-label="Open TeamGuider app" title="App login">
-                                <i class="fa-solid fa-globe" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-card__pro-badge">
-                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production SaaS · Paying users
-                    </div>
-                    <h3 class="project-card__title" id="proj2Title">TeamGuider</h3>
-                    <p class="project-card__subtitle">AI-powered SOP &amp; Playbook Platform</p>
-                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
-
-                    <div class="project-card__psr">
-                        <div class="psr-item">
-                            <span class="psr-label">Problem</span>
-                            <p>Growing teams lose operational knowledge in chat threads and tribal memory — onboarding takes weeks and processes are never documented consistently.</p>
-                        </div>
-                        <div class="psr-item">
-                            <span class="psr-label">Solution</span>
-                            <p>Built a subscription SaaS platform where teams create, manage, and share AI-generated SOPs and playbooks — with access controls, quizzes, and analytics.</p>
-                        </div>
-                        <div class="psr-item">
-                            <span class="psr-label">Result</span>
-                            <p>Launched to paying customers across multiple businesses including mobi-promo and others — full subscription billing, Pro/Enterprise tiers, and team collaboration live.</p>
-                        </div>
-                    </div>
-
-                    <div class="project-card__stack" aria-label="Tech stack">
-                        <span>React</span><span>NestJS</span><span>PostgreSQL</span><span>AI Integration</span><span>Stripe</span>
-                    </div>
-                    <div class="project-card__cta">
-                        <a href="https://teamguider.com" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
-                            <i class="fa-solid fa-eye" aria-hidden="true"></i> Live Site
-                        </a>
-                        <a href="https://app.teamguider.com/login" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> App Login
-                        </a>
-                    </div>
+                <div class="more-work__grid">
+                    <a href="https://senecart.com" target="_blank" rel="noopener noreferrer"><span>SenecArt</span><small>Gallery management SaaS</small><span class="link-icon"><svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span></a>
+                    <a href="https://romantiklove.com" target="_blank" rel="noopener noreferrer"><span>RomantikLove</span><small>Gifting platform</small><span class="link-icon"><svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span></a>
+                    <a href="https://prijava.dpi.gov.mk" target="_blank" rel="noopener noreferrer"><span>DPI Registration</span><small>Government portal</small><span class="link-icon"><svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span></a>
+                    <a href="https://learning.gfeb.org/" target="_blank" rel="noopener noreferrer"><span>GFEB Learning</span><small>Course platform</small><span class="link-icon"><svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span></a>
+                    <a href="https://mobi-promo.com/welcome" target="_blank" rel="noopener noreferrer"><span>Mobi Promo</span><small>Campaign platform</small><span class="link-icon"><svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span></a>
                 </div>
-            </article>
-
-            <!-- Pro 3: SeneCart -->
-            <article class="project-card reveal" style="--delay:.1s" aria-labelledby="proj3Title">
-                <div class="project-card__image-wrap">
-                    <div class="project-card__browser-frame" aria-hidden="true">
-                        <div class="browser-bar">
-                            <span class="browser-dot"></span><span class="browser-dot"></span><span class="browser-dot"></span>
-                            <span class="browser-url">senecart.com</span>
-                        </div>
-                        <div class="browser-body browser-body--crm">
-                            <div class="mock-sidebar">
-                                <div class="mock-sidebar-item active"></div>
-                                <div class="mock-sidebar-item"></div>
-                                <div class="mock-sidebar-item"></div>
-                            </div>
-                            <div class="mock-main">
-                                <div class="mock-stat-row">
-                                    <div class="mock-stat"></div><div class="mock-stat"></div><div class="mock-stat"></div>
-                                </div>
-                                <div class="mock-table">
-                                    <div class="mock-tr"></div><div class="mock-tr"></div><div class="mock-tr mock-tr--alt"></div><div class="mock-tr"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card__image-overlay" aria-hidden="true"></div>
-                </div>
-                <div class="project-card__body">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">03</span>
-                        <div class="project-card__links" aria-label="Project links">
-                            <a href="https://senecart.com" target="_blank" rel="noopener noreferrer" aria-label="Visit SeneCart" title="senecart.com">
-                                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="project-card__pro-badge">
-                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production · Art &amp; Gallery sector
-                    </div>
-                    <h3 class="project-card__title" id="proj3Title">SenecArt</h3>
-                    <p class="project-card__subtitle">Artwork Inventory Management SaaS</p>
-                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
-
-                    <div class="project-card__psr">
-                        <div class="psr-item">
-                            <span class="psr-label">Problem</span>
-                            <p>Art galleries and private collectors managed provenance, valuations, and exhibition schedules across spreadsheets — a fragile, unscalable approach.</p>
-                        </div>
-                        <div class="psr-item">
-                            <span class="psr-label">Solution</span>
-                            <p>Developed a full-featured inventory SaaS with consignment tracking, client/collector CRM, exhibition management, sales analytics, and public portfolio sharing.</p>
-                        </div>
-                        <div class="psr-item">
-                            <span class="psr-label">Result</span>
-                            <p>Shipped a polished, multi-tenant SaaS platform for the art industry — with provenance chains, appraisal records, and shareable digital portfolio links.</p>
-                        </div>
-                    </div>
-
-                    <div class="project-card__stack" aria-label="Tech stack">
-                        <span>React</span><span>Laravel</span><span>MySQL</span><span>REST API</span><span>Multi-tenant</span>
-                    </div>
-                    <div class="project-card__cta">
-                        <a href="https://senecart.com" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm">
-                            <i class="fa-solid fa-eye" aria-hidden="true"></i> Live Site
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Pro 4: Other production sites row -->
-            <article class="project-card project-card--compact reveal" style="--delay:.15s" aria-labelledby="proj4Title">
-                <div class="project-card__body project-card__body--full">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">04</span>
-                    </div>
-                    <div class="project-card__pro-badge">
-                        <i class="fa-solid fa-shield-check" aria-hidden="true"></i> Production · Additional client work
-                    </div>
-                    <h3 class="project-card__title" id="proj4Title">Additional Production Systems</h3>
-                    <p class="project-card__role">Role: Full-stack Developer &nbsp;·&nbsp; NDRIT GmbH/MediaSoft</p>
-                    <p class="project-card__desc">Several more live commercial systems built and deployed at NDRIT GmbH/MediaSoft — a romantic gifting platform, a government registration portal, online course platform, and a promotional campaign platform.</p>
-
-                    <div class="project-card__multi-links">
-                        <a href="https://romantiklove.com" target="_blank" rel="noopener noreferrer" class="multi-link">
-                            <span class="multi-link__label">romantiklove.com</span>
-                            <span class="multi-link__tag">Gifting platform</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://prijava.dpi.gov.mk" target="_blank" rel="noopener noreferrer" class="multi-link">
-                            <span class="multi-link__label">prijava.dpi.gov.mk</span>
-                            <span class="multi-link__tag">Gov. registration portal</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://learning.gfeb.org/" target="_blank" rel="noopener noreferrer" class="multi-link">
-                            <span class="multi-link__label">learning.gfeb.org</span>
-                            <span class="multi-link__tag">Online course platform</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://mobi-promo.com/welcome" target="_blank" rel="noopener noreferrer" class="multi-link">
-                            <span class="multi-link__label">mobi-promo.com</span>
-                            <span class="multi-link__tag">Promotional platform</span>
-                            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-                        </a>
-                    </div>
-
-                    <div class="project-card__stack" aria-label="Tech stack">
-                        <span>Laravel</span><span>React</span><span>Spring Boot</span><span>MySQL</span><span>PostgreSQL</span>
-                    </div>
-                </div>
-            </article>
-
+            </div>
         </div>
+    </section>
 
-        <!-- ── TIER 2: PERSONAL ──────────────────────────── -->
-        <div class="projects__tier-label reveal" style="--delay:.1s; margin-top: 5rem;">
-      <span class="tier-badge tier-badge--personal">
-        <i class="fa-brands fa-github" aria-hidden="true"></i> Personal — side projects &amp; experiments
-      </span>
-        </div>
-
-        <div class="projects__grid projects__grid--personal">
-
-            <article class="project-card project-card--personal reveal" aria-labelledby="proj5Title">
-                <div class="project-card__image-wrap">
-                    <img src="MomentShareConnect.jpg" alt="Moment Share Connect app screenshot" class="project-card__image" loading="lazy" width="640" height="380">
-                    <div class="project-card__image-overlay" aria-hidden="true"></div>
+    <section class="experience section section--tinted" id="experience" aria-labelledby="experienceTitle">
+        <div class="container">
+            <header class="section-intro reveal">
+                <div>
+                    <p class="section-label">02 / Experience</p>
+                    <h2 id="experienceTitle">Where I learned to ship.</h2>
                 </div>
-                <div class="project-card__body">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">05</span>
-                        <div class="project-card__links" aria-label="Project links">
-                            <a href="https://moments-share-connect.vercel.app/" target="_blank" rel="noopener noreferrer" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                            <a href="https://github.com/drilonsaiti/moments-share-connect" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+                <p>I work across the stack, but my strongest contribution is owning features from an ambiguous requirement through implementation, integration and production.</p>
+            </header>
+
+            <div class="experience-list">
+                <article class="experience-item reveal">
+                    <div class="experience-item__date mono"><time datetime="2024">2024</time> – <time datetime="2026">2026</time></div>
+                    <div class="experience-item__body">
+                        <div class="experience-item__heading">
+                            <div><h3>Full-stack Web Developer</h3><p>NDRIT GmbH / MediaSoft · Remote</p></div>
+                            <span class="status-pill">Current</span>
                         </div>
+                        <ul>
+                            <li>Built and shipped customer-facing and internal features across SaaS, e-commerce, CRM/ERP and subscription products.</li>
+                            <li>Implemented payment and third-party integrations, backend business logic, APIs and data-heavy product workflows.</li>
+                            <li>Owned features across frontend, backend and database layers through testing and production deployment.</li>
+                        </ul>
+                        <div class="tag-list"><span>React</span><span>Laravel</span><span>Spring Boot</span><span>PostgreSQL</span><span>MySQL</span><span>Docker</span></div>
                     </div>
-                    <h3 class="project-card__title" id="proj5Title">Moment Share Connect</h3>
-                    <p class="project-card__role">Solo · Full-stack</p>
-                    <p class="project-card__desc">Real-time event media platform — guests scan a QR code to upload photos and videos; organizers get an instant, downloadable gallery post-event.</p>
-                    <div class="project-card__stack"><span>React</span><span>Spring Boot</span><span>PostgreSQL</span><span>Supabase storage</span></div>
-                    <div class="project-card__cta">
-                        <a href="https://moments-share-connect.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
-                        <a href="https://github.com/drilonsaiti/moments-share-connect" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
-                    </div>
-                </div>
-            </article>
+                </article>
 
-            <article class="project-card project-card--personal reveal" style="--delay:.1s" aria-labelledby="proj6Title">
-                <div class="project-card__image-wrap">
-                    <img src="The-Eventors.png" alt="The Eventors event platform screenshot" class="project-card__image" loading="lazy" width="640" height="380">
-                    <div class="project-card__image-overlay" aria-hidden="true"></div>
-                </div>
-                <div class="project-card__body">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">06</span>
-                        <div class="project-card__links" aria-label="Project links">
-                            <a href="https://medisyncpro.vercel.app/" target="_blank" rel="noopener noreferrer" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                            <a href="https://github.com/drilonsaiti/The-Eventors-v2" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-                        </div>
+                <article class="experience-item reveal">
+                    <div class="experience-item__date mono"><time datetime="2023">2023</time> – <time datetime="2024">2024</time></div>
+                    <div class="experience-item__body">
+                        <div class="experience-item__heading"><div><h3>Intern Web Developer</h3><p>PurpleDot · Skopje</p></div></div>
+                        <ul>
+                            <li>Worked on real web-development tasks while learning structured delivery, debugging and collaboration under deadlines.</li>
+                            <li>Collaborated with development and product teammates and improved the quality of handoff and implementation work.</li>
+                        </ul>
+                        <div class="tag-list"><span>JavaScript</span><span>PHP</span><span>MySQL</span><span>Git</span></div>
                     </div>
-                    <h3 class="project-card__title" id="proj6Title">The Eventors</h3>
-                    <p class="project-card__role">Team · Full-stack</p>
-                    <p class="project-card__desc">Event discovery platform with profile creation, map-based venue display, real-time participant counts, and a social follow feed.</p>
-                    <div class="project-card__stack"><span>Flutter</span><span>Spring Boot</span><span>PostgreSQL</span><span>Google Maps</span></div>
-                    <div class="project-card__cta">
-                        <a href="https://medisyncpro.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
-                        <a href="https://github.com/drilonsaiti/The-Eventors-v2" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="project-card project-card--personal reveal" style="--delay:.2s" aria-labelledby="proj7Title">
-                <div class="project-card__image-wrap">
-                    <img src="E-Book.png" alt="E-Book semantic web application screenshot" class="project-card__image" loading="lazy" width="640" height="380">
-                    <div class="project-card__image-overlay" aria-hidden="true"></div>
-                </div>
-                <div class="project-card__body">
-                    <div class="project-card__meta">
-                        <span class="project-card__number" aria-hidden="true">07</span>
-                        <div class="project-card__links" aria-label="Project links">
-                            <a href="https://e-book-q4i6.onrender.com/" target="_blank" rel="noopener noreferrer" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
-                            <a href="https://github.com/drilonsaiti/E-book" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-                        </div>
-                    </div>
-                    <h3 class="project-card__title" id="proj7Title">E-Book — Semantic Web</h3>
-                    <p class="project-card__role">Academic · Full-stack</p>
-                    <p class="project-card__desc">Spring Boot + Apache Jena app that pulls structured book data from DBpedia via SPARQL — demonstrating semantic web and linked-data architecture.</p>
-                    <div class="project-card__stack"><span>Spring Boot</span><span>Apache Jena</span><span>SPARQL</span><span>RDFa</span></div>
-                    <div class="project-card__cta">
-                        <a href="https://e-book-q4i6.onrender.com/" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--sm"><i class="fa-solid fa-eye" aria-hidden="true"></i> Demo</a>
-                        <a href="https://github.com/drilonsaiti/E-book" target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm"><i class="fa-brands fa-github" aria-hidden="true"></i> Code</a>
-                    </div>
-                </div>
-            </article>
-
+                </article>
+            </div>
         </div>
+    </section>
 
-        <div class="projects__more reveal">
-            <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
-                <i class="fa-brands fa-github" aria-hidden="true"></i> View all on GitHub
-            </a>
+    <section class="capabilities section" id="capabilities" aria-labelledby="capabilitiesTitle">
+        <div class="container">
+            <header class="section-intro reveal">
+                <div>
+                    <p class="section-label">03 / Capabilities</p>
+                    <h2 id="capabilitiesTitle">Technology is the tool. Delivery is the skill.</h2>
+                </div>
+                <p>I prefer capability-based stacks over logo walls. These are the areas I can contribute to immediately in a product team.</p>
+            </header>
+
+            <div class="capability-grid">
+                <article class="capability-card reveal">
+                    <span class="capability-card__index mono">A</span>
+                    <h3>Frontend systems</h3>
+                    <p>Responsive product interfaces, reusable components and data-driven application flows.</p>
+                    <ul><li>React & TypeScript</li><li>Next.js</li><li>JavaScript</li><li>Tailwind CSS</li></ul>
+                </article>
+                <article class="capability-card reveal">
+                    <span class="capability-card__index mono">B</span>
+                    <h3>Backend & APIs</h3>
+                    <p>Business logic, authentication, integrations and maintainable application architecture.</p>
+                    <ul><li>Laravel & PHP</li><li>Java & Spring Boot</li><li>NestJS / Node.js</li><li>REST APIs</li></ul>
+                </article>
+                <article class="capability-card reveal">
+                    <span class="capability-card__index mono">C</span>
+                    <h3>Data & architecture</h3>
+                    <p>Data modelling for transactional workflows, multi-tenant products and operational systems.</p>
+                    <ul><li>PostgreSQL</li><li>MySQL</li><li>Supabase / Firebase</li><li>Redis / MongoDB</li></ul>
+                </article>
+                <article class="capability-card reveal">
+                    <span class="capability-card__index mono">D</span>
+                    <h3>Delivery & tooling</h3>
+                    <p>Practical workflows that move features from local development to production reliably.</p>
+                    <ul><li>Docker</li><li>Git & GitHub</li><li>Linux</li><li>Testing & CI</li></ul>
+                </article>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- CONTACT -->
-<section class="contact section-pad" id="contact" aria-labelledby="contactHeading">
-    <div class="container">
-        <div class="contact__inner">
-            <div class="contact__left reveal">
-                <div class="section-label">Contact</div>
-                <h2 class="section-heading" id="contactHeading">Let's build<br><em>something great</em></h2>
-                <p class="contact__body">I'm open to full-time roles, contract work, and interesting collaboration. Drop me a line and I'll respond within 24 hours.</p>
-                <div class="contact__links" aria-label="Contact options">
-                    <button class="contact__link contact__link--copy" id="copyEmailBtn" aria-label="Copy email address to clipboard" title="Click to copy email">
-                        <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                        <span class="copy-email__text">drilon-saiti@hotmail.com</span>
-                        <span class="copy-email__feedback" aria-live="polite"></span>
-                    </button>
-                    <a href="https://www.linkedin.com/in/drilon-saiti/" target="_blank" rel="noopener noreferrer" class="contact__link">
-                        <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-                        <span>linkedin.com/in/drilon-saiti</span>
+    <section class="lab section section--dark" id="lab" aria-labelledby="labTitle">
+        <div class="container">
+            <header class="section-intro section-intro--dark reveal">
+                <div>
+                    <p class="section-label">04 / Independent builds</p>
+                    <h2 id="labTitle">Selected engineering outside client work.</h2>
+                </div>
+                <p>Recent repositories chosen for engineering depth, not quantity. They cover offline product design, multi-tenant architecture, backend correctness and secure media workflows.</p>
+            </header>
+
+            <div class="repo-grid">
+                <article class="repo-card reveal">
+                    <div class="repo-card__top"><span class="mono">PRODUCT SYSTEM</span><span class="repo-status">Complete</span></div>
+                    <h3>Store Console</h3>
+                    <p>Offline-capable POS and inventory system with camera and hardware barcode scanning, parked sales, refunds, reporting and resilient checkout.</p>
+                    <div class="repo-flow mono"><span>Next.js</span><i><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></i><span>Firebase</span><i><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></i><span>PWA</span></div>
+                    <div class="tag-list"><span>TypeScript</span><span>Zustand</span><span>TanStack Query</span><span>Vitest</span></div>
+                    <a class="repo-card__link" href="https://github.com/drilonsaiti/store-pos" target="_blank" rel="noopener noreferrer">View repository <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                </article>
+
+
+
+                <article class="repo-card reveal">
+                    <div class="repo-card__top"><span class="mono">BACKEND DESIGN</span><span class="repo-status">Tested API</span></div>
+                    <h3>Investment Account API</h3>
+                    <p>Laravel ledger API focused on financial correctness, immutable transactions, concurrency control and precise monetary calculations.</p>
+                    <div class="repo-flow mono"><span>Laravel</span><i><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></i><span>Ledger</span><i><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></i><span>MySQL</span></div>
+                    <div class="tag-list"><span>Row locking</span><span>BCMath</span><span>Feature tests</span><span>REST</span></div>
+                    <a class="repo-card__link" href="https://github.com/drilonsaiti/investment-account" target="_blank" rel="noopener noreferrer">View repository <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                </article>
+
+                <article class="repo-card reveal">
+                    <div class="repo-card__top">
+                        <span class="mono">LARAVEL PRODUCT</span>
+                        <span class="repo-status repo-status--progress">In progress</span>
+                    </div>
+
+                    <h3>Symposium</h3>
+
+                    <p>
+                        Conference management platform for organisers and speakers with talk submissions,
+                        revision history, favourites, notifications, live search and role-aware workflows.
+                    </p>
+
+                    <div class="repo-flow mono">
+                        <span>Laravel</span>
+                        <i>
+                            <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </i>
+
+                        <span>Domain Logic</span>
+
+                        <i>
+                            <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </i>
+
+                        <span>Meilisearch</span>
+                    </div>
+
+                    <div class="tag-list">
+                        <span>PHP 8.3</span>
+                        <span>Laravel Scout</span>
+                        <span>Policies</span>
+                        <span>Events &amp; Listeners</span>
+                        <span>Notifications</span>
+                        <span>Pest</span>
+                    </div>
+
+                    <a class="repo-card__link"
+                       href="https://github.com/drilonsaiti/symposium"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        View repository
+
+                        <svg class="ui-icon ui-icon--external"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="2"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             aria-hidden="true">
+                            <path d="M15 3h6v6"></path>
+                            <path d="M10 14 21 3"></path>
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        </svg>
                     </a>
-                    <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer" class="contact__link">
-                        <i class="fa-brands fa-github" aria-hidden="true"></i>
-                        <span>github.com/drilonsaiti</span>
-                    </a>
+                </article>
+
+                <article class="repo-card reveal">
+                    <div class="repo-card__top"><span class="mono">SAAS ARCHITECTURE</span><span class="repo-status repo-status--progress">In progress</span></div>
+                    <h3>DineFlow</h3>
+                    <p>Multi-tenant QR ordering SaaS with isolated venue data, public ordering, an explicit order-state machine and real-time staff updates.</p>
+                    <div class="repo-flow mono"><span>Next.js</span><i><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></i><span>NestJS</span><i><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></i><span>Postgres</span></div>
+                    <div class="tag-list"><span>Prisma</span><span>Socket.io</span><span>RLS</span><span>Supabase</span></div>
+                    <a class="repo-card__link" href="https://github.com/drilonsaiti/dineflow" target="_blank" rel="noopener noreferrer">View repository <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                </article>
+
+            </div>
+
+            <div class="lab__footer reveal"><a href="https://github.com/drilonsaiti?tab=repositories" target="_blank" rel="noopener noreferrer">Browse all public repositories <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a></div>
+        </div>
+    </section>
+
+    <section class="about section" id="about" aria-labelledby="aboutTitle">
+        <div class="container about-grid">
+            <div class="about-grid__heading reveal">
+                <p class="section-label">05 / About</p>
+                <h2 id="aboutTitle">Software engineer with a bias for useful things.</h2>
+            </div>
+            <div class="about-grid__body reveal">
+                <p class="about-grid__lead">I’m a full-stack engineer who enjoys the point where product decisions and technical decisions meet.</p>
+                <p>I’ve worked on commercial systems used by real businesses, from commerce and payments to subscription SaaS and internal operations. I’m most effective when I can understand the problem, own a feature across the stack and stay close to the result after release.</p>
+                <p>I studied Computer Science at FINKI / FCSE in Skopje. Outside client work, I keep building side projects to test ideas and sharpen the parts of the stack I want to understand more deeply.</p>
+                <div class="about-grid__facts">
+                    <div><span class="mono">FOCUS</span><strong>Full-stack product engineering</strong></div>
+                    <div><span class="mono">EDUCATION</span><strong>Computer Science · FINKI / FCSE</strong></div>
+                    <div><span class="mono">WORK STYLE</span><strong>Remote · Cross-functional</strong></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact section" id="contact" aria-labelledby="contactTitle">
+        <div class="container contact-panel reveal">
+            <div class="contact-panel__copy">
+                <p class="section-label">06 / Contact</p>
+                <h2 id="contactTitle">Have a product problem worth solving?</h2>
+                <p>I’m open to strong full-time opportunities and selected collaborations where I can contribute across product and engineering.</p>
+                <div class="contact-panel__links">
+                    <button type="button" class="text-link" id="copyEmailBtn" data-email="drilon-saiti@hotmail.com">drilon-saiti@hotmail.com <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg><span class="copy-feedback" aria-live="polite"></span></button>
+                    <a class="text-link" href="https://www.linkedin.com/in/drilon-saiti/" target="_blank" rel="noopener noreferrer">LinkedIn <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+                    <a class="text-link" href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer">GitHub <svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
                 </div>
             </div>
 
-            <div class="contact__right reveal" style="--delay:.2s">
-                <form class="contact-form" id="contactForm" action="https://formsubmit.co/b61156f524cb025e06290a4eed779a42" method="POST" novalidate aria-label="Contact form">
-                    <input type="hidden" name="_subject" value="New Message from Portfolio Contact Form">
-                    <input type="hidden" name="_captcha" value="false">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="fullName">Name <span aria-hidden="true">*</span></label>
-                            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required autocomplete="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="companyName">Company</label>
-                            <input type="text" id="companyName" name="companyName" placeholder="Optional" autocomplete="organization">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email <span aria-hidden="true">*</span></label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message <span aria-hidden="true">*</span></label>
-                        <textarea id="message" name="message" placeholder="Tell me about your project or opportunity…" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn--primary btn--full">
-                        Send Message <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
-                    </button>
-                </form>
-            </div>
+            <form class="contact-form" id="contactForm" novalidate aria-label="Contact form">
+                <!-- Web3Forms access keys are designed to be used in frontend forms. Replace this placeholder with your key. -->
+                <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                <input type="hidden" name="subject" value="New portfolio enquiry — Drilon Saiti">
+                <input type="hidden" name="from_name" value="Drilon Saiti Portfolio">
+                <input type="checkbox" name="botcheck" class="form-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="form-grid">
+                    <label>Name<input type="text" name="name" required autocomplete="name" placeholder="Your name"></label>
+                    <label>Email<input type="email" name="email" required autocomplete="email" placeholder="you@company.com"></label>
+                </div>
+                <label>Company <span>(optional)</span><input type="text" name="company" autocomplete="organization" placeholder="Company or team"></label>
+                <label>Message<textarea name="message" rows="5" required placeholder="Tell me about the opportunity or problem."></textarea></label>
+                <button class="button button--primary button--wide" type="submit">
+                    <span class="contact-form__button-label">Send message</span>
+                    <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
+                </button>
+                <p class="contact-form__status" id="contactFormStatus" role="status" aria-live="polite"></p>
+            </form>
         </div>
-    </div>
-</section>
+    </section>
+</main>
 
-<!-- FOOTER -->
-<footer class="footer" role="contentinfo">
-    <div class="container">
-        <div class="footer__inner">
-            <p class="footer__copy"></p>
-            <nav class="footer__nav" aria-label="Footer navigation">
-                <a href="#hero">Top ↑</a>
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </nav>
-        </div>
+<footer class="footer">
+    <div class="container footer__inner">
+        <p>© <span id="currentYear"></span> Drilon Saiti</p>
+        <p class="mono">DESIGNED & BUILT WITH INTENT</p>
+        <a href="#hero">Back to top <svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"></path></svg></a>
     </div>
 </footer>
+
+<div class="command-palette" id="commandPalette" aria-hidden="true" inert>
+    <div class="command-palette__backdrop" data-command-close></div>
+    <div class="command-palette__dialog" role="dialog" aria-modal="true" aria-labelledby="commandTitle">
+        <div class="command-palette__search">
+            <span class="command-search-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></span>
+            <input id="commandInput" type="text" autocomplete="off" placeholder="Type a command…" aria-labelledby="commandTitle">
+            <kbd>Esc</kbd>
+        </div>
+        <div class="command-palette__body">
+            <p class="mono" id="commandTitle">QUICK NAVIGATION</p>
+            <div class="command-list" id="commandList">
+                <button type="button" data-command-target="#work"><span><b>Selected work</b><small>TeamGuider, commerce, AutoScout24 integration</small></span><kbd>W</kbd></button>
+                <button type="button" data-command-target="#experience"><span><b>Experience</b><small>Roles and production responsibilities</small></span><kbd>E</kbd></button>
+                <button type="button" data-command-target="#capabilities"><span><b>Capabilities</b><small>Frontend, backend, data and delivery</small></span><kbd>C</kbd></button>
+                <button type="button" data-command-target="#lab"><span><b>Independent builds</b><small>Store Console, DineFlow, Investment API, Wedora</small></span><kbd>I</kbd></button>
+                <button type="button" data-command-target="#contact"><span><b>Contact</b><small>Start a conversation</small></span><span class="command-action-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 10 4 15 9 20"></polyline><path d="M20 4v7a4 4 0 0 1-4 4H4"></path></svg></span></button>
+                <a href="Drilon-Saiti-CV.pdf" download="Drilon-Saiti-CV"><span><b>Download CV</b><small>PDF résumé</small></span><span class="command-action-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></span></a>
+                <a href="https://github.com/drilonsaiti" target="_blank" rel="noopener noreferrer"><span><b>Open GitHub</b><small>Repositories and activity</small></span><span class="command-action-icon"><svg class="ui-icon ui-icon--external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span></a>
+                <button type="button" data-copy-command="drilon-saiti@hotmail.com"><span><b>Copy email</b><small>drilon-saiti@hotmail.com</small></span><span class="command-action-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></span></button>
+            </div>
+            <p class="command-empty" id="commandEmpty" hidden>No matching commands.</p>
+        </div>
+        <div class="command-palette__footer"><span class="command-hint"><svg class="ui-icon ui-icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"></path></svg><svg class="ui-icon ui-icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg> Navigate</span><span>Enter Select</span><span>Ctrl / Cmd + K Close</span></div>
+    </div>
+</div>
 
 <script defer src="index.js"></script>
 </body>
