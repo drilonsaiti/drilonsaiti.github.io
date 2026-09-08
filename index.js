@@ -79,6 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileMenu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeMobileMenu);
         });
+
+        // Close the mobile menu when the user taps anywhere outside it.
+        document.addEventListener('pointerdown', event => {
+            if (menuToggle.getAttribute('aria-expanded') !== 'true') return;
+            if (mobileMenu.contains(event.target) || menuToggle.contains(event.target)) return;
+            closeMobileMenu();
+        });
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -333,6 +340,92 @@ document.addEventListener('DOMContentLoaded', () => {
                 visual.style.transform = '';
             });
         });
+
+        // Pointer glow inside stack cards.
+        document.querySelectorAll('.capability').forEach(card => {
+            card.addEventListener('pointermove', event => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--card-x', `${event.clientX - rect.left}px`);
+                card.style.setProperty('--card-y', `${event.clientY - rect.top}px`);
+            });
+        });
+
+        // Subtle custom cursor. It is disabled for touch devices and reduced motion.
+        root.classList.add('has-custom-cursor');
+
+        const cursorDot = document.createElement('div');
+        const cursorRing = document.createElement('div');
+        const cursorLabel = document.createElement('span');
+
+        cursorDot.className = 'cursor-dot';
+        cursorRing.className = 'cursor-ring';
+        cursorLabel.className = 'cursor-ring__label';
+        cursorRing.appendChild(cursorLabel);
+        body.append(cursorDot, cursorRing);
+
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let ringX = targetX;
+        let ringY = targetY;
+        let cursorVisible = false;
+
+        const setCursorVisible = visible => {
+            cursorVisible = visible;
+            cursorDot.classList.toggle('is-visible', visible);
+            cursorRing.classList.toggle('is-visible', visible);
+            body.style.setProperty('--pointer-opacity', visible ? '.9' : '0');
+        };
+
+        const renderCursor = () => {
+            ringX += (targetX - ringX) * 0.16;
+            ringY += (targetY - ringY) * 0.16;
+
+            cursorDot.style.transform = `translate3d(${targetX}px, ${targetY}px, 0)`;
+            cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+            requestAnimationFrame(renderCursor);
+        };
+
+        document.addEventListener('pointermove', event => {
+            targetX = event.clientX;
+            targetY = event.clientY;
+            body.style.setProperty('--pointer-x', `${event.clientX}px`);
+            body.style.setProperty('--pointer-y', `${event.clientY}px`);
+            if (!cursorVisible) setCursorVisible(true);
+        }, {passive: true});
+
+        document.addEventListener('pointerleave', () => setCursorVisible(false));
+        document.addEventListener('pointerenter', () => setCursorVisible(true));
+
+        const interactiveSelector = 'a, button, [role="button"]';
+        const labelSelector = '.project-link, .lab-card a, .more-work__list a';
+
+        document.addEventListener('pointerover', event => {
+            const interactive = event.target.closest(interactiveSelector);
+            const labelled = event.target.closest(labelSelector);
+
+            cursorRing.classList.toggle('is-interactive', Boolean(interactive));
+            cursorRing.classList.toggle('has-label', Boolean(labelled));
+            cursorLabel.textContent = labelled ? 'OPEN' : '';
+        });
+
+        document.addEventListener('pointerout', event => {
+            const nextInteractive = event.relatedTarget?.closest?.(interactiveSelector);
+            const nextLabelled = event.relatedTarget?.closest?.(labelSelector);
+
+            if (!nextInteractive) cursorRing.classList.remove('is-interactive');
+            if (!nextLabelled) {
+                cursorRing.classList.remove('has-label');
+                cursorLabel.textContent = '';
+            }
+        });
+
+        // Keep the native text cursor inside form fields.
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('pointerenter', () => setCursorVisible(false));
+            field.addEventListener('pointerleave', () => setCursorVisible(true));
+        });
+
+        renderCursor();
     }
 
     const contactForm = document.getElementById('contactForm');
