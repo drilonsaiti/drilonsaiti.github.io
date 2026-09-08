@@ -1037,7 +1037,9 @@ main,
     z-index: 1;
 }
 
-/* Custom cursor — desktop/fine pointer only, enabled by JS */
+/* Hybrid desktop cursor.
+   Normal page areas use a small custom dot + trailing ring.
+   Interactive controls keep the native pointer and only the thin halo. */
 .cursor-dot,
 .cursor-ring {
     position: fixed;
@@ -1046,7 +1048,7 @@ main,
     z-index: 10050;
     pointer-events: none;
     opacity: 0;
-    will-change: transform, width, height, opacity;
+    will-change: transform, opacity;
 }
 
 .cursor-dot {
@@ -1055,38 +1057,24 @@ main,
     margin: -2.5px 0 0 -2.5px;
     border-radius: 50%;
     background: var(--accent-2);
-    box-shadow: 0 0 16px var(--accent-glow);
-    transition: opacity .16s ease, transform .06s linear;
+    box-shadow: 0 0 14px rgba(157, 135, 255, .42);
+    transition: opacity .12s ease;
 }
 
 .cursor-ring {
     width: 30px;
     height: 30px;
     margin: -15px 0 0 -15px;
-    display: grid;
-    place-items: center;
-    border: 1px solid rgba(200,190,255,.52);
+    border: 1px solid rgba(184, 169, 255, .58);
     border-radius: 999px;
-    background: rgba(157,135,255,.025);
-    backdrop-filter: blur(2px);
+    background: rgba(157, 135, 255, .018);
     transition:
-        opacity .16s ease,
-        width .2s cubic-bezier(.2,.75,.2,1),
-        height .2s cubic-bezier(.2,.75,.2,1),
-        margin .2s cubic-bezier(.2,.75,.2,1),
-        border-color .2s ease,
-        background .2s ease;
-}
-
-.cursor-ring__label {
-    opacity: 0;
-    color: var(--text);
-    font-family: var(--font-mono);
-    font-size: .55rem;
-    letter-spacing: .08em;
-    line-height: 1;
-    text-transform: uppercase;
-    transition: opacity .15s ease;
+        opacity .14s ease,
+        width .18s cubic-bezier(.2,.75,.2,1),
+        height .18s cubic-bezier(.2,.75,.2,1),
+        margin .18s cubic-bezier(.2,.75,.2,1),
+        border-color .18s ease,
+        background .18s ease;
 }
 
 .cursor-dot.is-visible,
@@ -1094,36 +1082,38 @@ main,
     opacity: 1;
 }
 
+/* Interactive state: native pointer returns, dot disappears,
+   halo stays light and does not cover the control. */
+.cursor-dot.is-interactive {
+    opacity: 0;
+}
+
 .cursor-ring.is-interactive {
-    width: 48px;
-    height: 48px;
-    margin: -24px 0 0 -24px;
-    border-color: rgba(200,190,255,.78);
-    background: rgba(157,135,255,.09);
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    border-color: rgba(197, 185, 255, .92);
+    background: transparent;
+    opacity: .72;
 }
 
-.cursor-ring.has-label {
-    width: 62px;
-    height: 62px;
-    margin: -31px 0 0 -31px;
-    border-color: rgba(200,190,255,.62);
-    background: rgba(12,12,17,.78);
-}
-
-.cursor-ring.has-label .cursor-ring__label {
-    opacity: 1;
-}
-
-html.has-custom-cursor body,
-html.has-custom-cursor a,
-html.has-custom-cursor button,
-html.has-custom-cursor [role="button"] {
+/* Hide the native cursor only on non-interactive page areas. */
+html.has-hybrid-cursor body {
     cursor: none;
 }
 
-html.has-custom-cursor input,
-html.has-custom-cursor textarea,
-html.has-custom-cursor select {
+html.has-hybrid-cursor a,
+html.has-hybrid-cursor button,
+html.has-hybrid-cursor [role="button"],
+html.has-hybrid-cursor summary,
+html.has-hybrid-cursor label[for] {
+    cursor: pointer;
+}
+
+html.has-hybrid-cursor input,
+html.has-hybrid-cursor textarea,
+html.has-hybrid-cursor select,
+html.has-hybrid-cursor [contenteditable="true"] {
     cursor: text;
 }
 
@@ -1161,7 +1151,6 @@ html.has-custom-cursor select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .cursor-dot,
     .cursor-ring,
     body::after,
     .capability::before {

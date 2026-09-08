@@ -350,17 +350,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Subtle custom cursor. It is disabled for touch devices and reduced motion.
-        root.classList.add('has-custom-cursor');
+        // Hybrid cursor: custom dot + trailing ring on the page,
+        // native pointer on interactive controls.
+        root.classList.add('has-hybrid-cursor');
 
         const cursorDot = document.createElement('div');
         const cursorRing = document.createElement('div');
-        const cursorLabel = document.createElement('span');
-
         cursorDot.className = 'cursor-dot';
         cursorRing.className = 'cursor-ring';
-        cursorLabel.className = 'cursor-ring__label';
-        cursorRing.appendChild(cursorLabel);
         body.append(cursorDot, cursorRing);
 
         let targetX = window.innerWidth / 2;
@@ -368,12 +365,21 @@ document.addEventListener('DOMContentLoaded', () => {
         let ringX = targetX;
         let ringY = targetY;
         let cursorVisible = false;
+        let overInteractive = false;
+        let overTextField = false;
 
         const setCursorVisible = visible => {
             cursorVisible = visible;
-            cursorDot.classList.toggle('is-visible', visible);
-            cursorRing.classList.toggle('is-visible', visible);
+            const showCustom = visible && !overTextField;
+            cursorDot.classList.toggle('is-visible', showCustom);
+            cursorRing.classList.toggle('is-visible', showCustom);
             body.style.setProperty('--pointer-opacity', visible ? '.9' : '0');
+        };
+
+        const setInteractive = interactive => {
+            overInteractive = interactive;
+            cursorDot.classList.toggle('is-interactive', interactive);
+            cursorRing.classList.toggle('is-interactive', interactive);
         };
 
         const renderCursor = () => {
@@ -396,33 +402,33 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('pointerleave', () => setCursorVisible(false));
         document.addEventListener('pointerenter', () => setCursorVisible(true));
 
-        const interactiveSelector = 'a, button, [role="button"]';
-        const labelSelector = '.project-link, .lab-card a, .more-work__list a';
+        const interactiveSelector = 'a, button, [role="button"], summary, label[for]';
 
         document.addEventListener('pointerover', event => {
-            const interactive = event.target.closest(interactiveSelector);
-            const labelled = event.target.closest(labelSelector);
-
-            cursorRing.classList.toggle('is-interactive', Boolean(interactive));
-            cursorRing.classList.toggle('has-label', Boolean(labelled));
-            cursorLabel.textContent = labelled ? 'OPEN' : '';
+            setInteractive(Boolean(event.target.closest(interactiveSelector)));
         });
 
         document.addEventListener('pointerout', event => {
             const nextInteractive = event.relatedTarget?.closest?.(interactiveSelector);
-            const nextLabelled = event.relatedTarget?.closest?.(labelSelector);
-
-            if (!nextInteractive) cursorRing.classList.remove('is-interactive');
-            if (!nextLabelled) {
-                cursorRing.classList.remove('has-label');
-                cursorLabel.textContent = '';
-            }
+            if (!nextInteractive) setInteractive(false);
         });
 
-        // Keep the native text cursor inside form fields.
-        document.querySelectorAll('input, textarea, select').forEach(field => {
-            field.addEventListener('pointerenter', () => setCursorVisible(false));
-            field.addEventListener('pointerleave', () => setCursorVisible(true));
+        // Form controls always use the normal browser text cursor.
+        document.querySelectorAll('input, textarea, select, [contenteditable="true"]').forEach(field => {
+            field.addEventListener('pointerenter', () => {
+                overTextField = true;
+                cursorDot.classList.remove('is-visible');
+                cursorRing.classList.remove('is-visible');
+            });
+
+            field.addEventListener('pointerleave', () => {
+                overTextField = false;
+                if (cursorVisible) {
+                    cursorDot.classList.add('is-visible');
+                    cursorRing.classList.add('is-visible');
+                    setInteractive(overInteractive);
+                }
+            });
         });
 
         renderCursor();
