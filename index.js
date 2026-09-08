@@ -3,42 +3,48 @@
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.documentElement;
     const body = document.body;
-    const header = document.getElementById('siteHeader');
-    const progress = document.getElementById('scrollProgress');
     const themeToggle = document.getElementById('themeToggle');
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
+    const siteHeader = document.getElementById('siteHeader');
+    const scrollProgress = document.getElementById('scrollProgress');
+    const currentYear = document.getElementById('currentYear');
     const commandTrigger = document.getElementById('commandTrigger');
     const commandPalette = document.getElementById('commandPalette');
     const commandInput = document.getElementById('commandInput');
     const commandList = document.getElementById('commandList');
     const commandEmpty = document.getElementById('commandEmpty');
-    const currentYear = document.getElementById('currentYear');
 
     if (currentYear) currentYear.textContent = new Date().getFullYear();
 
-    function updateThemeColor(theme) {
+    function updateThemeMeta(theme) {
         const meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', theme === 'dark' ? '#0F0E0D' : '#F7F5F0');
+        if (meta) meta.setAttribute('content', theme === 'dark' ? '#07070A' : '#F4F4F7');
+        if (themeToggle) {
+            const next = theme === 'dark' ? 'light' : 'dark';
+            themeToggle.setAttribute('aria-label', `Switch to ${next} mode`);
+            themeToggle.setAttribute('title', `Switch to ${next} mode`);
+        }
     }
 
-    updateThemeColor(root.dataset.theme);
+    updateThemeMeta(root.dataset.theme || 'dark');
 
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
-            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            const current = root.dataset.theme === 'light' ? 'light' : 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
             root.dataset.theme = next;
             localStorage.setItem('ds-theme', next);
-            updateThemeColor(next);
+            updateThemeMeta(next);
         });
     }
 
     function updateScrollUI() {
         const scrollTop = window.scrollY;
         const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        const pct = scrollable > 0 ? (scrollTop / scrollable) * 100 : 0;
-        if (progress) progress.style.width = `${pct}%`;
-        if (header) header.classList.toggle('is-scrolled', scrollTop > 12);
+        const progress = scrollable > 0 ? Math.min(100, (scrollTop / scrollable) * 100) : 0;
+        if (scrollProgress) scrollProgress.style.width = `${progress}%`;
+        if (siteHeader) siteHeader.classList.toggle('is-scrolled', scrollTop > 18);
     }
 
     window.addEventListener('scroll', updateScrollUI, {passive: true});
@@ -70,11 +76,27 @@ document.addEventListener('DOMContentLoaded', () => {
             open ? closeMobileMenu() : openMobileMenu();
         });
 
-        mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
     }
 
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', event => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+            const target = document.querySelector(href);
+            if (!target) return;
+            event.preventDefault();
+            target.scrollIntoView({behavior: 'smooth', block: 'start'});
+            history.replaceState(null, '', href);
+        });
+    });
+
     const revealItems = document.querySelectorAll('.reveal');
-    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if ('IntersectionObserver' in window && !reducedMotion) {
         const revealObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
@@ -82,39 +104,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 revealObserver.unobserve(entry.target);
             });
         }, {rootMargin: '0px 0px -70px 0px', threshold: 0.05});
+
         revealItems.forEach(item => revealObserver.observe(item));
     } else {
         revealItems.forEach(item => item.classList.add('is-visible'));
     }
 
-    const navTargets = [...document.querySelectorAll('[data-nav]')];
-    const trackedSections = navTargets
+    const navLinks = [...document.querySelectorAll('[data-nav]')];
+    const navSections = navLinks
         .map(link => document.getElementById(link.dataset.nav))
         .filter(Boolean);
 
-    if ('IntersectionObserver' in window && navTargets.length) {
+    if ('IntersectionObserver' in window && navLinks.length) {
         const sectionObserver = new IntersectionObserver(entries => {
             const visible = entries
                 .filter(entry => entry.isIntersecting)
                 .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
             if (!visible) return;
-            navTargets.forEach(link => link.classList.toggle('is-active', link.dataset.nav === visible.target.id));
-        }, {rootMargin: '-25% 0px -60% 0px', threshold: [0, 0.1, 0.5]});
-        trackedSections.forEach(section => sectionObserver.observe(section));
+            navLinks.forEach(link => {
+                link.classList.toggle('is-active', link.dataset.nav === visible.target.id);
+            });
+        }, {rootMargin: '-28% 0px -58% 0px', threshold: [0, 0.08, 0.35]});
+
+        navSections.forEach(section => sectionObserver.observe(section));
     }
 
-    document.querySelectorAll('.case-study').forEach(caseStudy => {
-        const buttons = [...caseStudy.querySelectorAll('[data-mode-button]')];
-        const panels = [...caseStudy.querySelectorAll('[data-mode-panel]')];
+    document.querySelectorAll('[data-project]').forEach(project => {
+        const buttons = [...project.querySelectorAll('[data-mode-button]')];
+        const panels = [...project.querySelectorAll('[data-mode-panel]')];
 
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 const mode = button.dataset.modeButton;
+
                 buttons.forEach(item => {
                     const active = item === button;
                     item.classList.toggle('is-active', active);
                     item.setAttribute('aria-pressed', String(active));
                 });
+
                 panels.forEach(panel => {
                     const active = panel.dataset.modePanel === mode;
                     panel.classList.toggle('is-active', active);
@@ -132,6 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             textarea.value = value;
             textarea.style.position = 'fixed';
             textarea.style.opacity = '0';
+            textarea.style.pointerEvents = 'none';
             document.body.appendChild(textarea);
             textarea.select();
             document.execCommand('copy');
@@ -150,7 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyEmailButton = document.getElementById('copyEmailBtn');
     if (copyEmailButton) {
         copyEmailButton.addEventListener('click', () => {
-            copyText(copyEmailButton.dataset.email, copyEmailButton.querySelector('.copy-feedback'));
+            copyText(
+                copyEmailButton.dataset.email,
+                copyEmailButton.querySelector('.copy-feedback')
+            );
         });
     }
 
@@ -166,18 +199,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const items = visibleCommandItems();
         if (!items.length) return;
         selectedCommandIndex = (index + items.length) % items.length;
-        items.forEach((item, idx) => item.classList.toggle('is-selected', idx === selectedCommandIndex));
+        items.forEach((item, itemIndex) => {
+            item.classList.toggle('is-selected', itemIndex === selectedCommandIndex);
+        });
         items[selectedCommandIndex].scrollIntoView({block: 'nearest'});
     }
 
     function filterCommands(query) {
         if (!commandList) return;
         const normalized = query.trim().toLowerCase();
-        const allItems = [...commandList.querySelectorAll('button, a')];
-        allItems.forEach(item => {
-            const matches = !normalized || item.textContent.toLowerCase().includes(normalized);
-            item.hidden = !matches;
+        const items = [...commandList.querySelectorAll('button, a')];
+
+        items.forEach(item => {
+            item.hidden = Boolean(normalized) && !item.textContent.toLowerCase().includes(normalized);
         });
+
         const visible = visibleCommandItems();
         if (commandEmpty) commandEmpty.hidden = visible.length > 0;
         selectedCommandIndex = 0;
@@ -193,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.add('command-open');
         commandInput.value = '';
         filterCommands('');
-        window.setTimeout(() => commandInput.focus(), 10);
+        window.setTimeout(() => commandInput.focus(), 20);
     }
 
     function closeCommandPalette() {
@@ -202,12 +238,17 @@ document.addEventListener('DOMContentLoaded', () => {
         commandPalette.setAttribute('aria-hidden', 'true');
         commandPalette.inert = true;
         body.classList.remove('command-open');
-        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') lastFocusedElement.focus();
+        if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+            lastFocusedElement.focus();
+        }
     }
 
     if (commandTrigger) commandTrigger.addEventListener('click', openCommandPalette);
+
     if (commandPalette) {
-        commandPalette.querySelectorAll('[data-command-close]').forEach(el => el.addEventListener('click', closeCommandPalette));
+        commandPalette.querySelectorAll('[data-command-close]').forEach(element => {
+            element.addEventListener('click', closeCommandPalette);
+        });
     }
 
     if (commandInput) {
@@ -222,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (event.key === 'Enter') {
                 event.preventDefault();
                 const items = visibleCommandItems();
-                if (items[selectedCommandIndex]) items[selectedCommandIndex].click();
+                items[selectedCommandIndex]?.click();
             }
         });
     }
@@ -232,17 +273,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = event.target.closest('button, a');
             if (!item || item.hidden) return;
             const items = visibleCommandItems();
-            setSelectedCommand(items.indexOf(item));
+            const index = items.indexOf(item);
+            if (index >= 0) setSelectedCommand(index);
         });
 
         commandList.addEventListener('click', event => {
             const targetButton = event.target.closest('[data-command-target]');
             const copyButton = event.target.closest('[data-copy-command]');
+            const anchor = event.target.closest('a');
 
             if (targetButton) {
                 const target = document.querySelector(targetButton.dataset.commandTarget);
                 closeCommandPalette();
-                if (target) window.setTimeout(() => target.scrollIntoView({behavior: 'smooth', block: 'start'}), 30);
+                if (target) {
+                    window.setTimeout(() => target.scrollIntoView({behavior: 'smooth', block: 'start'}), 30);
+                }
             }
 
             if (copyButton) {
@@ -257,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            if (event.target.closest('a')) closeCommandPalette();
+            if (anchor) closeCommandPalette();
         });
     }
 
@@ -265,15 +310,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const commandShortcut = (event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k';
         if (commandShortcut) {
             event.preventDefault();
-            commandPalette && commandPalette.classList.contains('is-open') ? closeCommandPalette() : openCommandPalette();
+            const isOpen = commandPalette?.classList.contains('is-open');
+            isOpen ? closeCommandPalette() : openCommandPalette();
             return;
         }
 
         if (event.key === 'Escape') {
-            if (commandPalette && commandPalette.classList.contains('is-open')) closeCommandPalette();
+            if (commandPalette?.classList.contains('is-open')) closeCommandPalette();
             else closeMobileMenu();
         }
     });
+
+    if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+        document.querySelectorAll('.project-visual').forEach(visual => {
+            visual.addEventListener('pointermove', event => {
+                const rect = visual.getBoundingClientRect();
+                const x = (event.clientX - rect.left) / rect.width - 0.5;
+                const y = (event.clientY - rect.top) / rect.height - 0.5;
+                visual.style.transform = `perspective(1200px) rotateX(${(-y * 1.8).toFixed(2)}deg) rotateY(${(x * 2.2).toFixed(2)}deg)`;
+            });
+            visual.addEventListener('pointerleave', () => {
+                visual.style.transform = '';
+            });
+        });
+    }
 
     const contactForm = document.getElementById('contactForm');
     const contactFormStatus = document.getElementById('contactFormStatus');
@@ -297,7 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         contactForm.addEventListener('input', event => {
-            if (event.target.matches('input, textarea')) event.target.removeAttribute('aria-invalid');
+            if (event.target.matches('input, textarea')) {
+                event.target.removeAttribute('aria-invalid');
+            }
             if (contactFormStatus?.classList.contains('is-error')) setFormStatus();
         });
 
@@ -320,15 +382,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const botcheck = contactForm.elements.botcheck;
-
             if (botcheck?.checked) {
                 contactForm.reset();
-                setFormStatus(
-                    'Message sent. Thanks — I’ll get back to you soon.',
-                    'success'
-                );
+                setFormStatus('Message sent. Thanks — I’ll get back to you soon.', 'success');
                 return;
             }
+
             setSubmitting(true);
             setFormStatus('Sending your message…');
 
@@ -351,7 +410,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 contactForm.reset();
-                contactForm.querySelectorAll('[aria-invalid]').forEach(field => field.removeAttribute('aria-invalid'));
+                contactForm.querySelectorAll('[aria-invalid]').forEach(field => {
+                    field.removeAttribute('aria-invalid');
+                });
                 setFormStatus('Message sent. Thanks — I’ll get back to you soon.', 'success');
             } catch (error) {
                 console.error('Contact form submission failed:', error);
